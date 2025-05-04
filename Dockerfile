@@ -3,7 +3,7 @@ FROM node:18 AS builder
 WORKDIR /app
 
 # Copia manifestos e instala deps
-COPY package*.json pnpm-lock.yaml ./
+COPY package*.json ./
 RUN npm install            
 # usa npm para compatibilidade com scripts :contentReference[oaicite:1]{index=1}
 
