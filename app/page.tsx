@@ -1,25 +1,68 @@
 "use client"
 
-import { useState } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { ArrowRight, Clock, DollarSign, Laptop, MessageSquare, Smartphone, Tablet } from "lucide-react"
 import ParticlesBackground from "@/components/particles-background"
 import WhatsappChat from "@/components/chat/whatsapp-chat"
+import { useEffect, useState } from 'react'
+import Lottie from 'lottie-react'
+import { LottiePlayer } from '@/components/LottiePlayer'
 
 export default function Home() {
   const [isChatOpen, setIsChatOpen] = useState(false)
 
   const openChat = () => setIsChatOpen(true)
   const closeChat = () => setIsChatOpen(false)
+  const [successAnimation, setSuccessAnimation] = useState<object | null>(null)
+
+  useEffect(() => {
+    fetch('/lotties/lottie-01.json')
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setSuccessAnimation(data);
+      })
+      .catch((err) => console.error(err)); // Em caso de erro
+  }, [])
   return (
     <div className="flex flex-col">
-      {/* Hero Section with Lateral Banner */}
+      {/* Hero Section with Lateral lottie */}
       <section className="relative min-h-screen flex flex-col md:flex-row items-center pt-32 pb-20 md:pt-40 md:pb-32 bg-gradient-to-b from-gray-900 via-blue-900 to-gray-900 overflow-hidden">
         <ParticlesBackground />
         <div className="container mx-auto px-4 md:px-6 flex flex-col md:flex-row items-center relative z-10">
-          <div className="w-full md:w-1/2 md:pr-8 mb-10 md:mb-0 order-2 md:order-1">
+          
+          {/* Lottie Animation */}
+          <div className="w-full md:w-1/2 order-2 md:order-1">
+            <div className="relative">
+              <div className="absolute -top-10 -left-10 w-40 h-40 bg-blue-500 rounded-full opacity-20 blur-3xl"></div>
+              <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-purple-500 rounded-full opacity-20 blur-3xl"></div>
+              {/* Imagem COMENTADA
+              <Image
+                src="/placeholder.svg?height=600&width=600"
+                alt="Automação empresarial"
+                width={600}
+                height={600}
+                className="rounded-2xl shadow-2xl relative z-10"
+              />*/}
+              <div>
+                {successAnimation ? (
+                  <Lottie
+                    animationData={successAnimation}
+                    className="min-w-[100px] max-w-[600px] max-h-[600px] relative z-10"
+                    loop
+                    autoplay
+                  />
+                ) : (
+                  <p className="text-white">Carregando animação...</p>
+                )}
+              </div>
+            </div>
+          </div>
+          {/* Texto Principal */}
+          <div className="w-full md:w-1/2 md:pr-8 mb-10 md:mb-0 order-1 md:order-2">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
               Coloque sua empresa no modo automático e aumente seus resultados
             </h1>
@@ -43,19 +86,6 @@ export default function Home() {
               </Button>
             </div>
           </div>
-          <div className="w-full md:w-1/2 order-1 md:order-2">
-            <div className="relative">
-              <div className="absolute -top-10 -left-10 w-40 h-40 bg-blue-500 rounded-full opacity-20 blur-3xl"></div>
-              <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-purple-500 rounded-full opacity-20 blur-3xl"></div>
-              <Image
-                src="/placeholder.svg?height=600&width=600"
-                alt="Automação empresarial"
-                width={600}
-                height={600}
-                className="rounded-2xl shadow-2xl relative z-10"
-              />
-            </div>
-          </div>
         </div>
 
         {/* Floating elements for futuristic effect */}
@@ -64,7 +94,7 @@ export default function Home() {
         <div className="absolute top-3/4 left-1/3 w-16 h-16 bg-blue-400 rounded-full opacity-10 blur-3xl animate-pulse"></div>
       </section>
 
-      {/* Responsiveness Section */}
+      {/* Responsiveness Section 
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-12">
@@ -124,7 +154,7 @@ export default function Home() {
             </Card>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Benefits Section */}
       <section className="py-20 bg-white">
@@ -139,12 +169,12 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            <div className="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+            <div className="bg-gradient-to-r from-blue-900 to-purple-800 rounded-lg p-8 shadow-lg hover:shadow-x1 transition-all duration-300 transform hover:-translate-y-1">
               <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-full w-16 h-16 flex items-center justify-center mb-6">
                 <DollarSign className="h-8 w-8" />
               </div>
-              <h3 className="text-xl font-bold mb-4">Aumento de Vendas</h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl text-white font-bold mb-4">Aumento de Vendas</h3>
+              <p className="text-gray-300">
                 Multiplique suas conversões com follow-ups automáticos e atendimento 24/7 que não deixa leads esfriarem.
               </p>
               <div className="mt-6 p-4 bg-blue-50 rounded-lg">
@@ -154,12 +184,12 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+            <div className="bg-gradient-to-r from-purple-800 to-blue-700 rounded-lg p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
               <div className="bg-gradient-to-r from-blue-600 to-purple-500 text-white rounded-full w-16 h-16 flex items-center justify-center mb-6">
                 <MessageSquare className="h-8 w-8" />
               </div>
-              <h3 className="text-xl font-bold mb-4">Atendimento 24/7</h3>
-              <p className="text-gray-600">
+              <h3 className="text-white text-xl font-bold mb-4">Atendimento 24/7</h3>
+              <p className="text-gray-300">
                 Ofereça suporte instantâneo em qualquer horário sem aumentar sua equipe ou custos operacionais.
               </p>
               <div className="mt-6 p-4 bg-blue-50 rounded-lg">
@@ -167,12 +197,12 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+            <div className="bg-gradient-to-r from-blue-700 to-purple-600 rounded-lg p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
               <div className="bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-full w-16 h-16 flex items-center justify-center mb-6">
                 <Clock className="h-8 w-8" />
               </div>
-              <h3 className="text-xl font-bold mb-4">Economia de Tempo</h3>
-              <p className="text-gray-600">
+              <h3 className="text-white text-xl font-bold mb-4">Economia de Tempo</h3>
+              <p className="text-gray-300">
                 Reduza erros manuais e libere sua equipe de tarefas repetitivas para focar no que realmente importa.
               </p>
               <div className="mt-6 p-4 bg-blue-50 rounded-lg">
@@ -196,7 +226,7 @@ export default function Home() {
       </section>
 
       {/* How It Works */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gradient-to-r from-gray-300 to-gray-200">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
@@ -266,9 +296,18 @@ export default function Home() {
             </div>
           </div>
         </div>
+        <div className="mt-12 text-center">
+          <Button
+            onClick={openChat}
+            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0 text-base sm:text-lg px-4 sm:px-6 py-4 sm:py-5 h-auto"
+          >
+            <MessageSquare className="mr-2 h-5 w-5" />
+            <span className="whitespace-normal">Demonstração de Atendimento Automático</span>
+          </Button>
+        </div>
       </section>
 
-      {/* Mini Portfolio */}
+      {/* Mini Portfolio 
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-12">
@@ -375,7 +414,7 @@ export default function Home() {
             </Card>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* CTA Final */}
       <section className="py-20 bg-gradient-to-r from-blue-900 to-purple-900 text-white">
