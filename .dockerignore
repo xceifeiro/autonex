@@ -1,0 +1,18 @@
+# Ignorar dependências e cache local
+node_modules
+npm-debug.log
+.pnpm-debug.log
+
+# Metadados do Git e CI/CD
+.git
+.gitignore
+
+# Artefatos de build locais e caches
+.next
+*.local
+.DS_Store
+
+# Locks e configs de editor
+pnpm-lock.yaml
+package-lock.json
+.vscode
