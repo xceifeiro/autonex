@@ -11,6 +11,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { CheckCircle, MessageSquare, CheckCheck, Smartphone, Globe, Instagram } from "lucide-react"
 import DemonstracaoChat from "@/components/chat/demonstracao-chat"
+import ComponentLinkWhatsApp from "@/components/LinkWhats"
 
 export default function Demonstracao() {
   const [isChatOpen, setIsChatOpen] = useState(false)
@@ -90,9 +91,9 @@ export default function Demonstracao() {
   const closeChat = () => setIsChatOpen(false)
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col pt-20">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-900 to-purple-900 text-white py-20">
+      <section className="bg-gradient-to-r from-blue-900 to-purple-900 text-white py-20 z-10 shadow-lg shadow-gray-700">
         <div className="container mx-auto px-4 md:px-6 text-center">
           <h1 className="text-3xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
             Experimente o Atendimento Automático com IA
@@ -113,7 +114,7 @@ export default function Demonstracao() {
       </section>
 
       {/* Como Funciona */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-gray-200">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
@@ -160,7 +161,7 @@ export default function Demonstracao() {
       </section>
 
       {/* Questionário */}
-      <section id="questionario" className="py-20 bg-gray-50">
+      <section id="questionario" className="py-20 bg-gray-100 z-10 shadow-[0_-10px_15px_-3px_rgba(0,0,0,0.1),_0_10px_15px_-3px_rgba(0,0,0,0.1)] shadow-gray-700">
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-12">
@@ -344,7 +345,7 @@ export default function Demonstracao() {
       </section>
 
       {/* Canais de Integração */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-gray-200">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
@@ -438,7 +439,7 @@ export default function Demonstracao() {
       </section>
 
       {/* Funcionalidades */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-100 z-10 shadow-gray-700 shadow-[0_-10px_15px_-3px_rgba(0,0,0,0.1),_0_10px_15px_-3px_rgba(0,0,0,0.1)]">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
@@ -628,7 +629,7 @@ export default function Demonstracao() {
       </section>
 
       {/* Benefícios */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-gray-200">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
@@ -651,7 +652,7 @@ export default function Demonstracao() {
                 </p>
                 <div className="bg-blue-50 p-4 rounded-lg">
                   <p className="text-blue-700 font-medium">
-                    "Aumentamos em 35% as conversões de vendas fora do horário comercial" - Cliente E-commerce
+                    Um atendente virtual automatizado sempre disponível para responder perguntas e resolver problemas.
                   </p>
                 </div>
               </CardContent>
@@ -667,7 +668,7 @@ export default function Demonstracao() {
                 </p>
                 <div className="bg-purple-50 p-4 rounded-lg">
                   <p className="text-purple-700 font-medium">
-                    "Economizamos R$ 15.000 por mês em custos operacionais" - Cliente Varejo
+                    Invista onde realmente importa: em pessoas e estratégias de crescimento.
                   </p>
                 </div>
               </CardContent>
@@ -683,7 +684,7 @@ export default function Demonstracao() {
                 </p>
                 <div className="bg-green-50 p-4 rounded-lg">
                   <p className="text-green-700 font-medium">
-                    "Nosso NPS aumentou de 67 para 89 em apenas 3 meses" - Cliente Saúde
+                    Aumente seu NPS com base em feedbacks positivos de clientes satisfeitos.
                   </p>
                 </div>
               </CardContent>
@@ -698,7 +699,7 @@ export default function Demonstracao() {
                 </p>
                 <div className="bg-yellow-50 p-4 rounded-lg">
                   <p className="text-yellow-700 font-medium">
-                    "Conseguimos lidar com o aumento de 300% nas consultas durante a Black Friday" - Cliente E-commerce
+                    Atendedimento simultâneo e automatizado com precisão e eficiência.
                   </p>
                 </div>
               </CardContent>
@@ -714,7 +715,7 @@ export default function Demonstracao() {
                 </p>
                 <div className="bg-red-50 p-4 rounded-lg">
                   <p className="text-red-700 font-medium">
-                    "Descobrimos 3 novos produtos para desenvolver a partir das conversas" - Cliente Serviços
+                    Folow-Upp é importantissimo para o sucesso do cliente e da empresa.
                   </p>
                 </div>
               </CardContent>
@@ -729,7 +730,7 @@ export default function Demonstracao() {
                 </p>
                 <div className="bg-blue-50 p-4 rounded-lg">
                   <p className="text-blue-700 font-medium">
-                    "Nossos atendentes agora fecham 40% mais vendas de alto valor" - Cliente Imobiliário
+                    Equipe com até 80% mais tempo livre para tarefas importantes.
                   </p>
                 </div>
               </CardContent>
@@ -754,7 +755,10 @@ export default function Demonstracao() {
               <MessageSquare className="mr-2 h-6 w-6" />
               Iniciar Demonstração
             </Button>
-            <Button size="lg" className="bg-white text-blue-900 hover:bg-gray-100 text-lg px-8 py-6 h-auto">
+            <Button 
+            onClick={ComponentLinkWhatsApp("Olá, vim através do site e gostaria de saber mais sobre automações de Marketing...")}
+            size="lg" 
+            className="bg-white border-2 hover:bg-white/0 hover:text-white text-blue-900 text-lg px-8 py-6 h-auto">
               Falar com um Consultor
             </Button>
           </div>

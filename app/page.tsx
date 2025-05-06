@@ -6,31 +6,22 @@ import { Card, CardContent } from "@/components/ui/card"
 import { ArrowRight, Clock, DollarSign, Laptop, MessageSquare, Smartphone, Tablet, Bot, Globe, FileText, Instagram, Sparkles, CheckCircle, } from "lucide-react"
 import ParticlesBackground from "@/components/particles-background"
 import WhatsappChat from "@/components/chat/whatsapp-chat"
-import { useEffect, useState } from 'react'
-import Lottie from 'lottie-react'
+import { useState } from 'react'
 import Link from "next/link"
 import { Badge } from "@/components/ui/badge"
-import { Pricing } from "@/components/ui/pricing";
+import { Pricing } from "@/components/ui/pricing"
+import dynamic from 'next/dynamic';
 
-
+const LottiePlayer = dynamic(() => import('@/components/LottiePlayer'), {
+  ssr: false,
+});
 
 export default function Home() {
   const [isChatOpen, setIsChatOpen] = useState(false)
 
   const openChat = () => setIsChatOpen(true)
   const closeChat = () => setIsChatOpen(false)
-  const [successAnimation, setSuccessAnimation] = useState<object | null>(null)
 
-  useEffect(() => {
-    fetch('/lotties/lottie-01.json')
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setSuccessAnimation(data);
-      })
-      .catch((err) => console.error(err)); // Em caso de erro
-  }, [])
   return (
     <div className="flex flex-col">
       {/* Hero Section with Lateral lottie */}
@@ -52,16 +43,7 @@ export default function Home() {
                 className="rounded-2xl shadow-2xl relative z-10"
               />*/}
               <div>
-                {successAnimation ? (
-                  <Lottie
-                    animationData={successAnimation}
-                    className="min-w-[100px] max-w-[600px] max-h-[600px] relative z-10"
-                    loop
-                    autoplay
-                  />
-                ) : (
-                  <p className="text-white">Carregando animação...</p>
-                )}
+                <LottiePlayer src="/lotties/lottie-01.json" className="max-w-[500px] max-h-[500px]" />
               </div>
             </div>
           </div>

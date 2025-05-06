@@ -126,3 +126,8 @@
 .animate-float-slow {
   animation: float-slow 8s ease-in-out infinite;
 }
+
+/* Esconder o footer nas páginas administrativas */
+.admin-layout + footer {
+  display: none;
+}

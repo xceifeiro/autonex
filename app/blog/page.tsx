@@ -152,11 +152,11 @@ export default function BlogPage() {
   const regularPosts = filteredPosts.slice(1)
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 pt-20">
+    <main className="min-h-screen bg-gradient-to-b from-gray-200 to-gray-300">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-blue-600 to-purple-700 py-20 px-4 sm:px-6 lg:px-8">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-[url('/placeholder.svg?height=800&width=1600')] bg-cover bg-center" />
+      <section className="relative bg-gradient-to-r from-blue-600 to-purple-700 pb-20 pt-40 px-4 sm:px-6 lg:px-8">
+        <div className="absolute inset-0 opacity-[0.05]">
+          <div className="absolute inset-0 bg-[url('/blog-bg.svg?height=800&width=1600')] bg-cover bg-center" />
         </div>
         <div className="relative max-w-4xl mx-auto text-center">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">Blog AutoNex</h1>

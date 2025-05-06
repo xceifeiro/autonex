@@ -24,6 +24,8 @@ import {
   DollarSign,
 } from "lucide-react"
 import WhatsappChat from "@/components/chat/whatsapp-chat"
+import { Pricing } from "@/components/ui/pricing"
+import ComponentLinkWhatsApp from "@/components/LinkWhats"
 
 export default function FullDigitalPage() {
   const [isChatOpen, setIsChatOpen] = useState(false)
@@ -54,6 +56,8 @@ export default function FullDigitalPage() {
                 <Button
                   size="lg"
                   className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white border-0 text-lg px-6 py-5 h-auto"
+                  onClick={() => window.open("https://api.whatsapp.com/send?phone=%205562993204235&text=%F0%9F%98%83+Ol%C3%A1+vim+atrav%C3%A9s+do+site%2C+gostaria+de+saber+mais+sobre+automa%C3%A7%C3%B5es...+%F0%9F%91%8B")}
+            
                 >
                   Quero Automatizar Meu Negócio
                 </Button>
@@ -61,10 +65,10 @@ export default function FullDigitalPage() {
                   size="lg"
                   variant="outline"
                   onClick={openChat}
-                  className="bg-transparent border-white text-white hover:bg-white/10 text-lg px-6 py-5 h-auto"
+                  className="bg-transparent border-white hover:text-white text-white hover:bg-white/10 text-lg px-6 py-5 h-auto"
                 >
                   <MessageSquare className="mr-2 h-5 w-5" />
-                  Falar com Consultor
+                  Ver demonstração
                 </Button>
               </div>
             </div>
@@ -113,7 +117,7 @@ export default function FullDigitalPage() {
                 <div className="mt-8 p-4 bg-white/10 rounded-xl">
                   <p className="text-white text-center">
                     <span className="text-sm">A partir de</span>
-                    <span className="text-3xl font-bold mx-2">R$ 497</span>
+                    <span className="text-3xl font-bold mx-2">{Pricing("Plano_01")}</span>
                     <span className="text-sm">/mês</span>
                   </p>
                 </div>
@@ -124,7 +128,7 @@ export default function FullDigitalPage() {
       </section>
 
       {/* Benefícios do Combo */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-gray-200 border-none rounded-none shadow-xl z-10">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
             <Badge className="mb-4 bg-blue-100 text-blue-800 px-4 py-1 text-sm rounded-full">Solução Completa</Badge>
@@ -304,7 +308,7 @@ export default function FullDigitalPage() {
       </section>
 
       {/* Como Funciona */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-200 z-0">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
             <Badge className="mb-4 bg-purple-100 text-purple-800 px-4 py-1 text-sm rounded-full">
@@ -418,20 +422,20 @@ export default function FullDigitalPage() {
       </section>
 
       {/* Planos e Preços */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-gradient-to-b from-gray-900 via-blue-900 to-gray-900">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
-            <Badge className="mb-4 bg-blue-100 text-blue-800 px-4 py-1 text-sm rounded-full">Planos Flexíveis</Badge>
+            <Badge variant="secondary" className="mb-4 bg-blue-100 text-blue-800 px-4 py-1 text-sm rounded-full">Planos Flexíveis</Badge>
             <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               Planos e Preços
             </h2>
-            <p className="text-lg text-gray-700 max-w-3xl mx-auto">
+            <p className="text-lg text-gray-300 max-w-3xl mx-auto">
               Escolha o plano ideal para o tamanho e necessidades do seu negócio
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <Card className="border-none shadow-lg hover:shadow-xl transition-all duration-300 bg-white overflow-hidden">
+            <Card className="border-none shadow-lg hover:shadow-xl shadow-black  hover:shadow-black transition-all duration-300 bg-white overflow-hidden">
               <div className="h-2 bg-gradient-to-r from-blue-500 to-blue-600"></div>
               <CardHeader className="pb-0">
                 <CardTitle className="text-2xl">Essencial</CardTitle>
@@ -439,11 +443,12 @@ export default function FullDigitalPage() {
               </CardHeader>
               <CardContent className="pt-6">
                 <div className="mb-6">
-                  <p className="text-gray-500 line-through">R$ 1.497/mês</p>
+                  <p className="text-gray-500 line-through">R$ 997/mês</p>
                   <div className="flex items-baseline">
-                    <span className="text-3xl font-bold">R$ 497</span>
+                    <span className="text-3xl font-bold">{Pricing("Plano_01")}</span>
                     <span className="text-gray-600 ml-2">/mês</span>
                   </div>
+                  <span className="text-gray-600 ml-2">+ valor de Setup</span>
                 </div>
                 <ul className="space-y-3">
                   <li className="flex items-start">
@@ -473,13 +478,14 @@ export default function FullDigitalPage() {
                 </ul>
               </CardContent>
               <CardFooter>
-                <Button className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700">
+                <Button className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700"
+                onClick={ComponentLinkWhatsApp("Olá, vim através do site e gostaria de saber mais sobre o plano Essencial.")}>
                   Contratar Agora
                 </Button>
               </CardFooter>
             </Card>
 
-            <Card className="border-none shadow-xl hover:shadow-2xl transition-all duration-300 bg-white overflow-hidden relative scale-105 z-10">
+            <Card className="border-none shadow-xl hover:shadow-2xl shadow-black  hover:shadow-black  transition-all duration-300 bg-white overflow-hidden relative scale-105 z-10">
               <div className="absolute top-0 right-0 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-xs font-bold px-4 py-1 rounded-bl-lg">
                 Mais Popular
               </div>
@@ -490,11 +496,12 @@ export default function FullDigitalPage() {
               </CardHeader>
               <CardContent className="pt-6">
                 <div className="mb-6">
-                  <p className="text-gray-500 line-through">R$ 2.497/mês</p>
+                  <p className="text-gray-500 line-through">R$ 1.997/mês</p>
                   <div className="flex items-baseline">
-                    <span className="text-3xl font-bold">R$ 1.197</span>
+                    <span className="text-3xl font-bold">{Pricing("Plano_02")}</span>
                     <span className="text-gray-600 ml-2">/mês</span>
                   </div>
+                  <span className="text-gray-600 ml-2">+ valor de Setup</span>
                 </div>
                 <ul className="space-y-3">
                   <li className="flex items-start">
@@ -524,13 +531,14 @@ export default function FullDigitalPage() {
                 </ul>
               </CardContent>
               <CardFooter>
-                <Button className="w-full bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700">
+                <Button className="w-full bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700"
+                onClick={ComponentLinkWhatsApp("Olá, vim através do site e gostaria de saber mais sobre o plano Profissional.")}>
                   Contratar Agora
                 </Button>
               </CardFooter>
             </Card>
 
-            <Card className="border-none shadow-lg hover:shadow-xl transition-all duration-300 bg-white overflow-hidden">
+            <Card className="border-none shadow-lg hover:shadow-xl shadow-black  hover:shadow-black transition-all duration-300 bg-white overflow-hidden">
               <div className="h-2 bg-gradient-to-r from-blue-500 to-blue-600"></div>
               <CardHeader className="pb-0">
                 <CardTitle className="text-2xl">Empresarial</CardTitle>
@@ -538,11 +546,11 @@ export default function FullDigitalPage() {
               </CardHeader>
               <CardContent className="pt-6">
                 <div className="mb-6">
-                  <p className="text-gray-500 line-through">R$ 3.997/mês</p>
+                  <p className="text-gray-500 line-through">R$ 3.197/mês</p>
                   <div className="flex items-baseline">
-                    <span className="text-3xl font-bold">R$ 1.997</span>
-                    <span className="text-gray-600 ml-2">+</span>
+                    <span className="text-3xl font-bold">{Pricing("Plano_03")}</span>
                   </div>
+                  <span className="text-gray-600 ml-2">+ valor á combinar por personalização</span>
                 </div>
                 <ul className="space-y-3">
                   <li className="flex items-start">
@@ -572,7 +580,8 @@ export default function FullDigitalPage() {
                 </ul>
               </CardContent>
               <CardFooter>
-                <Button className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700">
+                <Button className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700"
+                onClick={ComponentLinkWhatsApp("Olá, vim através do site e gostaria de saber mais sobre o plano Empresarial.")}>
                   Falar com Consultor
                 </Button>
               </CardFooter>
@@ -580,16 +589,16 @@ export default function FullDigitalPage() {
           </div>
 
           <div className="mt-12 text-center">
-            <p className="text-gray-600 mb-6">Todos os planos incluem suporte técnico e atualizações gratuitas</p>
+            <p className="text-gray-400 mb-6">Todos os planos incluem suporte técnico e atualizações gratuitas</p>
             <Button variant="outline" onClick={openChat} className="border-blue-600 text-blue-600 hover:bg-blue-50">
               <MessageSquare className="mr-2 h-5 w-5" />
-              Tirar Dúvidas com um Consultor
+              Demonstração de Atendimento Automátizado
             </Button>
           </div>
         </div>
       </section>
 
-      {/* Depoimentos */}
+      {/* Depoimentos 
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
@@ -732,10 +741,10 @@ export default function FullDigitalPage() {
             </Card>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* FAQ */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-gray-200">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
             <Badge className="mb-4 bg-blue-100 text-blue-800 px-4 py-1 text-sm rounded-full">Dúvidas Frequentes</Badge>
@@ -747,7 +756,7 @@ export default function FullDigitalPage() {
             </p>
           </div>
 
-          <div className="max-w-3xl mx-auto">
+          <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-lg p-8">
             <Accordion type="single" collapsible className="w-full">
               <AccordionItem value="item-1">
                 <AccordionTrigger className="text-left">
@@ -825,17 +834,23 @@ export default function FullDigitalPage() {
             Não fique para trás.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Button size="lg" className="bg-white text-blue-900 hover:bg-gray-100 text-lg px-8 py-6 h-auto">
-              Quero Automatizar Agora
+            <Button 
+            size="lg" 
+            className="bg-white text-blue-900 hover:bg-gray-300 text-lg px-8 py-6 h-auto"
+            onClick={() => window.open("https://api.whatsapp.com/send?phone=%205562993204235&text=%F0%9F%98%83+Ol%C3%A1+vim+atrav%C3%A9s+do+site%2C+gostaria+de+saber+mais+sobre+automa%C3%A7%C3%B5es...+%F0%9F%91%8B")}
+            >
+            Quero Automatizar Agora
             </Button>
             <Button
               variant="outline"
               size="lg"
               onClick={openChat}
-              className="border-white text-white hover:bg-white/10 text-lg px-8 py-6 h-auto"
+              className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white hover:text-white/90 text-lg px-8 py-6 h-auto border-0"
             >
-              <MessageSquare className="mr-2 h-5 w-5" />
-              Falar com um Consultor
+              <MessageSquare 
+              className="mr-2 h-5 w-5"
+              onClick={openChat} />
+              Ver demonstração
             </Button>
           </div>
         </div>

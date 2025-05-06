@@ -1,6 +1,10 @@
+"use client"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { BarChart2, Bot, MousePointer, Smartphone, Zap } from "lucide-react"
+import { BarChart2, Bot, MousePointer, Smartphone, Zap, Mail, TrendingUpDown, ShoppingCart, MessageCircleReply, CircleFadingPlus, UserCheck,
+  Workflow, OctagonAlert, Network, CircleDollarSign, FileUser, WalletCards, ContactRound
+} from "lucide-react"
+import ComponentLinkWhatsApp from "@/components/LinkWhats"
 
 export default function Solucoes() {
   return (
@@ -18,7 +22,7 @@ export default function Solucoes() {
       </section>
 
       {/* Automação de Vendas */}
-      <section id="vendas" className="py-20 bg-white">
+      <section id="vendas" className="py-20 bg-gray-200">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
@@ -41,24 +45,25 @@ export default function Solucoes() {
                 </li>
                 <li className="flex items-center">
                   <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-2 rounded-full mr-3">
-                    <Zap className="h-5 w-5" />
+                    <Mail className="h-5 w-5" />
                   </div>
                   <span>Envio de e-mails e mensagens personalizadas</span>
                 </li>
                 <li className="flex items-center">
                   <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-2 rounded-full mr-3">
-                    <Zap className="h-5 w-5" />
+                    <TrendingUpDown className="h-5 w-5" />
                   </div>
                   <span>Follow-ups inteligentes que não deixam leads esfriarem</span>
                 </li>
                 <li className="flex items-center">
                   <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-2 rounded-full mr-3">
-                    <Zap className="h-5 w-5" />
+                    <ShoppingCart className="h-5 w-5" />
                   </div>
                   <span>Recuperação de carrinhos abandonados</span>
                 </li>
               </ul>
               <div className="bg-gray-50 p-6 rounded-xl border border-gray-100 shadow-md mb-6">
+                {/* Depoimento Comentado}
                 <div className="flex items-center mb-2">
                   <div className="w-12 h-12 rounded-full overflow-hidden mr-3">
                     <Image
@@ -74,12 +79,13 @@ export default function Solucoes() {
                     <p className="text-sm text-gray-600">E-commerce de Moda</p>
                   </div>
                 </div>
+                */}
                 <p className="text-gray-600 italic text-sm">
-                  "Aumentamos nossas vendas em 40% em apenas 2 meses com a automação de follow-ups e recuperação de
-                  carrinhos abandonados."
+                  "Aumente suas vendas com um processo automático e eficiente, que não deixa nenhum Lead esfriar."
                 </p>
               </div>
-              <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0">
+              <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0"
+              onClick={ComponentLinkWhatsApp("Olá, vim através do site e gostaria de saber mais sobre automações para processo de Vendas...")}>
                 Quero Automatizar Minhas Vendas
               </Button>
             </div>
@@ -88,20 +94,36 @@ export default function Solucoes() {
                 <div className="absolute -top-5 -left-5 w-32 h-32 bg-blue-500 rounded-full opacity-20 blur-3xl"></div>
                 <div className="absolute -bottom-5 -right-5 w-32 h-32 bg-purple-500 rounded-full opacity-20 blur-3xl"></div>
                 <Image
-                  src="/placeholder.svg?height=500&width=600"
+                  src="/sales.svg"
                   alt="Automação de vendas"
-                  width={600}
+                  width={500}
                   height={500}
-                  className="rounded-xl shadow-xl relative z-10"
+                  className="max-w-[500px] rounded-xl shadow-xl relative z-10"
                 />
               </div>
             </div>
           </div>
         </div>
       </section>
+      {/* Divisor de Seção */}
+      <div className="relative h-10 md:h-10">
+        <div className="absolute w-full h-10 md:h-10 overflow-hidden">
+          <svg
+            className="absolute bottom-0 w-full h-full"
+            viewBox="0 0 1200 120"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+              className="fill-current text-white"
+            ></path>
+          </svg>
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/60 to-purple-500/60 backdrop-blur-sm"></div>
+        </div>
+      </div>
 
       {/* Atendimento Automatizado */}
-      <section id="atendimento" className="py-20 bg-gray-50">
+      <section id="atendimento" className="py-20 bg-gray-200">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div className="order-2 md:order-1">
@@ -109,11 +131,11 @@ export default function Solucoes() {
                 <div className="absolute -top-5 -left-5 w-32 h-32 bg-blue-500 rounded-full opacity-20 blur-3xl"></div>
                 <div className="absolute -bottom-5 -right-5 w-32 h-32 bg-purple-500 rounded-full opacity-20 blur-3xl"></div>
                 <Image
-                  src="/placeholder.svg?height=500&width=600"
+                  src="/chat-bot.svg"
                   alt="Atendimento automatizado"
-                  width={600}
+                  width={500}
                   height={500}
-                  className="rounded-xl shadow-xl relative z-10"
+                  className="max-w-[500px] rounded-xl shadow-xl relative z-10"
                 />
               </div>
             </div>
@@ -137,24 +159,25 @@ export default function Solucoes() {
                 </li>
                 <li className="flex items-center">
                   <div className="bg-gradient-to-r from-blue-600 to-purple-500 text-white p-2 rounded-full mr-3">
-                    <Bot className="h-5 w-5" />
+                    <MessageCircleReply className="h-5 w-5" />
                   </div>
                   <span>Respostas rápidas para dúvidas frequentes</span>
                 </li>
                 <li className="flex items-center">
                   <div className="bg-gradient-to-r from-blue-600 to-purple-500 text-white p-2 rounded-full mr-3">
-                    <Bot className="h-5 w-5" />
+                    <CircleFadingPlus className="h-5 w-5" />
                   </div>
                   <span>Integração com WhatsApp, Instagram e Facebook</span>
                 </li>
                 <li className="flex items-center">
                   <div className="bg-gradient-to-r from-blue-600 to-purple-500 text-white p-2 rounded-full mr-3">
-                    <Bot className="h-5 w-5" />
+                    <UserCheck className="h-5 w-5" />
                   </div>
                   <span>Transferência inteligente para atendentes humanos</span>
                 </li>
               </ul>
-              <div className="bg-gray-100 p-6 rounded-xl border border-gray-100 shadow-md mb-6">
+              <div className="bg-gray-50 p-6 rounded-xl border border-gray-100 shadow-md mb-6">
+                {/* Depoimento Comentado}
                 <div className="flex items-center mb-2">
                   <div className="w-12 h-12 rounded-full overflow-hidden mr-3">
                     <Image
@@ -166,25 +189,42 @@ export default function Solucoes() {
                     />
                   </div>
                   <div>
-                    <h4 className="font-bold">Clínica Estética BeautyPlus</h4>
-                    <p className="text-sm text-gray-600">Serviços de Estética</p>
+                    <h4 className="font-bold">Loja Virtual MegaFashion</h4>
+                    <p className="text-sm text-gray-600">E-commerce de Moda</p>
                   </div>
                 </div>
+                */}
                 <p className="text-gray-600 italic text-sm">
-                  "Nosso chatbot já converteu mais de 200 agendamentos fora do horário comercial. Um verdadeiro vendedor
-                  incansável!"
+                  "Um atendente para seu négocio com um chatbot humanizado que responde 24/7."
                 </p>
               </div>
-              <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0">
+              <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0"
+              onClick={ComponentLinkWhatsApp("Olá, vim através do site e gostaria de saber mais sobre atendimento automático...")}>
                 Quero Automatizar Meu Atendimento
               </Button>
             </div>
           </div>
         </div>
       </section>
+      {/* Divisor de Seção */}
+      <div className="relative h-10 md:h-10">
+        <div className="absolute w-full h-10 md:h-10 overflow-hidden">
+          <svg
+            className="absolute bottom-0 w-full h-full"
+            viewBox="0 0 1200 120"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+              className="fill-current text-white"
+            ></path>
+          </svg>
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/60 to-purple-500/60 backdrop-blur-sm"></div>
+        </div>
+      </div>
 
       {/* Operações Inteligentes */}
-      <section id="operacoes" className="py-20 bg-white">
+      <section id="operacoes" className="py-20 bg-gray-200">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
@@ -207,24 +247,25 @@ export default function Solucoes() {
                 </li>
                 <li className="flex items-center">
                   <div className="bg-gradient-to-r from-purple-500 to-purple-600 text-white p-2 rounded-full mr-3">
-                    <BarChart2 className="h-5 w-5" />
+                    <Workflow className="h-5 w-5" />
                   </div>
                   <span>Integração entre sistemas e plataformas</span>
                 </li>
                 <li className="flex items-center">
                   <div className="bg-gradient-to-r from-purple-500 to-purple-600 text-white p-2 rounded-full mr-3">
-                    <BarChart2 className="h-5 w-5" />
+                    <OctagonAlert className="h-5 w-5" />
                   </div>
                   <span>Alertas e monitoramentos automáticos</span>
                 </li>
                 <li className="flex items-center">
                   <div className="bg-gradient-to-r from-purple-500 to-purple-600 text-white p-2 rounded-full mr-3">
-                    <BarChart2 className="h-5 w-5" />
+                    <Network className="h-5 w-5" />
                   </div>
                   <span>Automação de tarefas administrativas</span>
                 </li>
               </ul>
               <div className="bg-gray-50 p-6 rounded-xl border border-gray-100 shadow-md mb-6">
+                {/* Depoimento Comentado}
                 <div className="flex items-center mb-2">
                   <div className="w-12 h-12 rounded-full overflow-hidden mr-3">
                     <Image
@@ -236,16 +277,17 @@ export default function Solucoes() {
                     />
                   </div>
                   <div>
-                    <h4 className="font-bold">Agência Digital CreativeMinds</h4>
-                    <p className="text-sm text-gray-600">Marketing Digital</p>
+                    <h4 className="font-bold">Loja Virtual MegaFashion</h4>
+                    <p className="text-sm text-gray-600">E-commerce de Moda</p>
                   </div>
                 </div>
+                */}
                 <p className="text-gray-600 italic text-sm">
-                  "Reduzimos o tempo gasto em tarefas operacionais em 65%. Nossa equipe agora foca em estratégia e
-                  criatividade."
+                  "Organize e separe suas tarefas com um processo automático e eficiente, que não deixa nada passar."
                 </p>
               </div>
-              <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0">
+              <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0"
+              onClick={ComponentLinkWhatsApp("Olá, vim através do site e gostaria de saber mais sobre automações de processos e operações...")}>
                 Quero Automatizar Minhas Operações
               </Button>
             </div>
@@ -254,20 +296,36 @@ export default function Solucoes() {
                 <div className="absolute -top-5 -left-5 w-32 h-32 bg-blue-500 rounded-full opacity-20 blur-3xl"></div>
                 <div className="absolute -bottom-5 -right-5 w-32 h-32 bg-purple-500 rounded-full opacity-20 blur-3xl"></div>
                 <Image
-                  src="/placeholder.svg?height=500&width=600"
+                  src="/work.svg"
                   alt="Operações inteligentes"
-                  width={600}
+                  width={500}
                   height={500}
-                  className="rounded-xl shadow-xl relative z-10"
+                  className="max-w-[500px] rounded-xl shadow-xl relative z-10"
                 />
               </div>
             </div>
           </div>
         </div>
       </section>
+      {/* Divisor de Seção */}
+      <div className="relative h-10 md:h-10">
+        <div className="absolute w-full h-10 md:h-10 overflow-hidden">
+          <svg
+            className="absolute bottom-0 w-full h-full"
+            viewBox="0 0 1200 120"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+              className="fill-current text-white"
+            ></path>
+          </svg>
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/60 to-purple-500/60 backdrop-blur-sm"></div>
+        </div>
+      </div>
 
       {/* Sites e Landing Pages */}
-      <section id="sites" className="py-20 bg-gray-50">
+      <section id="sites" className="py-20 bg-gray-200">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div className="order-2 md:order-1">
@@ -275,11 +333,11 @@ export default function Solucoes() {
                 <div className="absolute -top-5 -left-5 w-32 h-32 bg-blue-500 rounded-full opacity-20 blur-3xl"></div>
                 <div className="absolute -bottom-5 -right-5 w-32 h-32 bg-purple-500 rounded-full opacity-20 blur-3xl"></div>
                 <Image
-                  src="/placeholder.svg?height=500&width=600"
+                  src="/site.svg"
                   alt="Sites e landing pages"
-                  width={600}
+                  width={500}
                   height={500}
-                  className="rounded-xl shadow-xl relative z-10"
+                  className="max-w-[500px] rounded-xl shadow-xl relative z-10"
                 />
               </div>
             </div>
@@ -303,24 +361,25 @@ export default function Solucoes() {
                 </li>
                 <li className="flex items-center">
                   <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-2 rounded-full mr-3">
-                    <MousePointer className="h-5 w-5" />
+                    <CircleDollarSign className="h-5 w-5" />
                   </div>
                   <span>Landing pages focadas em conversão</span>
                 </li>
                 <li className="flex items-center">
                   <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-2 rounded-full mr-3">
-                    <MousePointer className="h-5 w-5" />
+                    <FileUser className="h-5 w-5" />
                   </div>
                   <span>Formulários inteligentes com automação</span>
                 </li>
                 <li className="flex items-center">
                   <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-2 rounded-full mr-3">
-                    <MousePointer className="h-5 w-5" />
+                    <WalletCards className="h-5 w-5" />
                   </div>
                   <span>Integração com sistemas de pagamento</span>
                 </li>
               </ul>
-              <div className="bg-gray-100 p-6 rounded-xl border border-gray-100 shadow-md mb-6">
+              <div className="bg-gray-50 p-6 rounded-xl border border-gray-100 shadow-md mb-6">
+                {/* Depoimento Comentado}
                 <div className="flex items-center mb-2">
                   <div className="w-12 h-12 rounded-full overflow-hidden mr-3">
                     <Image
@@ -332,25 +391,42 @@ export default function Solucoes() {
                     />
                   </div>
                   <div>
-                    <h4 className="font-bold">Consultoria FinancePro</h4>
-                    <p className="text-sm text-gray-600">Consultoria Financeira</p>
+                    <h4 className="font-bold">Loja Virtual MegaFashion</h4>
+                    <p className="text-sm text-gray-600">E-commerce de Moda</p>
                   </div>
                 </div>
+                */}
                 <p className="text-gray-600 italic text-sm">
-                  "Nossa nova landing page converteu 3x mais leads que a anterior, com formulários que já integram com
-                  nosso CRM."
+                  "Sites feitos para converter, com integrações, design inovador e sistemas de gestão."
                 </p>
               </div>
-              <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0">
+              <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0"
+              onClick={ComponentLinkWhatsApp("Olá, vim através do site e gostaria de saber mais sobre Sites e Landing Pages...")}>
                 Quero um Site que Converte
               </Button>
             </div>
           </div>
         </div>
       </section>
+      {/* Divisor de Seção */}
+      <div className="relative h-10 md:h-10">
+        <div className="absolute w-full h-10 md:h-10 overflow-hidden">
+          <svg
+            className="absolute bottom-0 w-full h-full"
+            viewBox="0 0 1200 120"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+              className="fill-current text-white"
+            ></path>
+          </svg>
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/60 to-purple-500/60 backdrop-blur-sm"></div>
+        </div>
+      </div>
 
       {/* Automação de Marketing */}
-      <section id="marketing" className="py-20 bg-white">
+      <section id="marketing" className="py-20 bg-gray-200">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
@@ -373,24 +449,25 @@ export default function Solucoes() {
                 </li>
                 <li className="flex items-center">
                   <div className="bg-gradient-to-r from-purple-500 to-purple-600 text-white p-2 rounded-full mr-3">
-                    <Smartphone className="h-5 w-5" />
+                    <Mail className="h-5 w-5" />
                   </div>
                   <span>Campanhas de e-mail marketing automatizadas</span>
                 </li>
                 <li className="flex items-center">
                   <div className="bg-gradient-to-r from-purple-500 to-purple-600 text-white p-2 rounded-full mr-3">
-                    <Smartphone className="h-5 w-5" />
+                    <ContactRound className="h-5 w-5" />
                   </div>
                   <span>Nutrição de leads com conteúdo personalizado</span>
                 </li>
                 <li className="flex items-center">
                   <div className="bg-gradient-to-r from-purple-500 to-purple-600 text-white p-2 rounded-full mr-3">
-                    <Smartphone className="h-5 w-5" />
+                    <BarChart2 className="h-5 w-5" />
                   </div>
                   <span>Análise automática de resultados de campanhas</span>
                 </li>
               </ul>
               <div className="bg-gray-50 p-6 rounded-xl border border-gray-100 shadow-md mb-6">
+                {/* Depoimento Comentado}
                 <div className="flex items-center mb-2">
                   <div className="w-12 h-12 rounded-full overflow-hidden mr-3">
                     <Image
@@ -402,16 +479,18 @@ export default function Solucoes() {
                     />
                   </div>
                   <div>
-                    <h4 className="font-bold">Escola de Idiomas GlobalSpeak</h4>
-                    <p className="text-sm text-gray-600">Educação</p>
+                    <h4 className="font-bold">Loja Virtual MegaFashion</h4>
+                    <p className="text-sm text-gray-600">E-commerce de Moda</p>
                   </div>
                 </div>
+                */}
                 <p className="text-gray-600 italic text-sm">
-                  "Nossas campanhas de e-mail automatizadas geraram 28% mais matrículas este semestre, com muito menos
-                  trabalho para nossa equipe."
+                  "Automatizar o processo de marketing é a chave para aumentar a eficiência e reduzir custos."
                 </p>
               </div>
-              <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0">
+              <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0"
+              onClick={ComponentLinkWhatsApp("Olá, vim através do site e gostaria de saber mais sobre automações de Marketing...")}
+              >
                 Quero Automatizar Meu Marketing
               </Button>
             </div>
@@ -420,11 +499,11 @@ export default function Solucoes() {
                 <div className="absolute -top-5 -left-5 w-32 h-32 bg-blue-500 rounded-full opacity-20 blur-3xl"></div>
                 <div className="absolute -bottom-5 -right-5 w-32 h-32 bg-purple-500 rounded-full opacity-20 blur-3xl"></div>
                 <Image
-                  src="/placeholder.svg?height=500&width=600"
+                  src="/marketing.svg"
                   alt="Automação de marketing"
-                  width={600}
+                  width={500}
                   height={500}
-                  className="rounded-xl shadow-xl relative z-10"
+                  className="max-w-[500px] p-8 rounded-xl shadow-xl relative z-10"
                 />
               </div>
             </div>
@@ -440,15 +519,21 @@ export default function Solucoes() {
             Agende uma consultoria gratuita e descubra como a automação pode transformar seus resultados
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Button size="lg" className="bg-white text-blue-900 hover:bg-gray-100 text-lg px-8 py-6 h-auto">
-              Quero Automatizar Meu Negócio
-            </Button>
             <Button
               size="lg"
               variant="outline"
-              className="text-white border-white hover:bg-white/10 text-lg px-8 py-6 h-auto"
-            >
-              Ver Todos os Cases
+              className="text-gray-700 border-0 bg-white/90 hover:bg-white/80 text-lg px-8 py-6 h-auto"
+              onClick={() => window.location.href = "/demonstracao"}
+              >
+              Ir para página de demonstração
+              </Button>
+              <Button
+              size="lg"
+              variant="outline"
+              className="text-white border-0 hover:text-white/80 bg-gradient-to-r from-blue-600 to-purple-600 hover:bg-blue-600 text-lg px-8 py-6 h-auto"
+              onClick={ComponentLinkWhatsApp("Olá, vim através do site e gostaria de saber mais sobre automações...")}
+              >
+              Conhecer Mais Sobre Automações
             </Button>
           </div>
         </div>

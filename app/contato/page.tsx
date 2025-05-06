@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Calendar, Mail, MapPin, Phone, MessageSquare } from "lucide-react"
+import { Pricing } from "@/components/ui/pricing"
 
 export default function Contato() {
   const [formData, setFormData] = useState({
@@ -286,20 +287,16 @@ export default function Contato() {
       {/* Mapa */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              Onde Estamos
-            </h2>
-            <p className="text-lg text-gray-700 max-w-3xl mx-auto">
-              Visite nosso escritório ou agende uma reunião online
-            </p>
-          </div>
-
-          <div className="rounded-xl overflow-hidden shadow-xl h-96 bg-gray-200 relative">
-            {/* Aqui seria inserido um mapa real */}
-            <div className="w-full h-full flex items-center justify-center">
-              <p className="text-gray-500">Mapa da localização da AutoNex</p>
-            </div>
+        <div className="rounded-xl overflow-hidden shadow-xl h-96 bg-gray-200 relative">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d239.328333748761!2d-48.9458735247497!3d-16.30999468238024!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x935ea413f7135c09%3A0xc36bb2fc556f877d!2sR.%20Inglaterra%20Q%2015%2C%20108%20-%20Vila%20Santa%20Isabel%2C%20An%C3%A1polis%20-%20GO%2C%2075083-325!5e0!3m2!1spt-BR!2sbr!4v1746518772312!5m2!1spt-BR!2sbr"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
               <div className="flex items-center text-white">
                 <MapPin className="h-6 w-6 mr-2" />
@@ -311,7 +308,7 @@ export default function Contato() {
       </section>
 
       {/* FAQ */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-gray-200">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
@@ -361,8 +358,7 @@ export default function Contato() {
               <CardContent className="pt-6">
                 <h3 className="text-xl font-bold mb-3">Qual o investimento necessário para automatizar meu negócio?</h3>
                 <p className="text-gray-600">
-                  O investimento varia conforme as necessidades do seu negócio. Oferecemos planos a partir de R$
-                  997/mês, com opções de implementação que cabem no seu orçamento.
+                  O investimento varia conforme as necessidades do seu negócio. Temos pacotes de serviços a partir de {Pricing("Plano_01")}.
                 </p>
               </CardContent>
             </Card>
@@ -378,15 +374,21 @@ export default function Contato() {
             Agende uma consultoria gratuita e descubra como a automação pode transformar seus resultados
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Button size="lg" className="bg-white text-blue-900 hover:bg-gray-100 text-lg px-8 py-6 h-auto">
-              Quero Automatizar Meu Negócio
+            <Button
+              size="lg"
+              variant="outline"
+              className="text-gray-700 border-0 bg-white/90 hover:bg-white/80 text-lg px-8 py-6 h-auto"
+              onClick={() => window.open("/consultoria#agendamento")}
+            >
+              agendar demonstração
             </Button>
             <Button
               size="lg"
               variant="outline"
-              className="text-white border-white hover:bg-white/10 text-lg px-8 py-6 h-auto"
+              className="text-white border-0 bg-gradient-to-r from-blue-600 to-purple-600 hover:text-white/80 text-lg px-8 py-6 h-auto"
+              onClick={() => window.open("/solucoes")}
             >
-              Ver Todos os Cases
+              Conhecer Serviços da AutoNex
             </Button>
           </div>
         </div>

@@ -1,7 +1,10 @@
+"use client"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { CheckCircle } from "lucide-react"
+import ComponentLinkWhatsApp from "@/components/LinkWhats"
+
 
 export default function Sobre() {
   return (
@@ -45,7 +48,7 @@ export default function Sobre() {
                 Nossa Visão
               </h2>
               <p className="text-gray-600 mb-6">
-                Ser reconhecida como a principal parceira de automação para pequenas e médias empresas no Brasil,
+                Ser reconhecida como a principal parceira de automação para empresas no Brasil,
                 transformando a maneira como os negócios operam e crescem através de soluções tecnológicas acessíveis e
                 eficientes.
               </p>
@@ -55,11 +58,11 @@ export default function Sobre() {
                 <div className="absolute -top-5 -left-5 w-32 h-32 bg-blue-500 rounded-full opacity-20 blur-3xl"></div>
                 <div className="absolute -bottom-5 -right-5 w-32 h-32 bg-purple-500 rounded-full opacity-20 blur-3xl"></div>
                 <Image
-                  src="/placeholder.svg?height=600&width=600"
-                  alt="Equipe AutoNex"
-                  width={600}
-                  height={600}
-                  className="rounded-xl shadow-xl relative z-10"
+                  src="/missao.svg"
+                  alt="Missão da AutoNex"
+                  width={500}
+                  height={500}
+                  className="max-w-[500px]"
                 />
               </div>
             </div>
@@ -68,7 +71,7 @@ export default function Sobre() {
       </section>
 
       {/* Valores */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-200">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
@@ -131,7 +134,7 @@ export default function Sobre() {
         </div>
       </section>
 
-      {/* Nossa História */}
+      {/* Nossa História COMENTADA 
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-12">
@@ -200,9 +203,9 @@ export default function Sobre() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
-      {/* Equipe */}
+      {/* Equipe 
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-12">
@@ -302,9 +305,9 @@ export default function Sobre() {
             </Button>
           </div>
         </div>
-      </section>
+      </section> */}
 
-      {/* Parceiros */}
+      {/* Parceiros 
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-12">
@@ -330,7 +333,7 @@ export default function Sobre() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* CTA Final */}
       <section className="py-20 bg-gradient-to-r from-blue-900 to-purple-900 text-white">
@@ -340,15 +343,21 @@ export default function Sobre() {
             Agende uma consultoria gratuita e descubra como a automação pode impulsionar seus resultados
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Button size="lg" className="bg-white text-blue-900 hover:bg-gray-100 text-lg px-8 py-6 h-auto">
-              Quero Automatizar Meu Negócio
+            <Button
+              size="lg"
+              variant="outline"
+              className="text-gray-700 border-0 bg-white/90 hover:bg-white/80 text-lg px-8 py-6 h-auto"
+              onClick={() => window.location.href = "/demonstracao"}
+            >
+              Ir para página de demonstração
             </Button>
             <Button
               size="lg"
               variant="outline"
-              className="text-white border-white hover:bg-white/10 text-lg px-8 py-6 h-auto"
+              className="text-white border-0 hover:text-white/80 bg-gradient-to-r from-blue-600 to-purple-600 hover:bg-blue-600 text-lg px-8 py-6 h-auto"
+              onClick={ComponentLinkWhatsApp("Olá, vim através do site e gostaria de saber mais sobre automações...")}
             >
-              Conhecer Mais Sobre a AutoNex
+              Conhecer Mais Sobre Automações
             </Button>
           </div>
         </div>

@@ -1,26 +1,25 @@
-// components/LottiePlayer.tsx
-import { FC } from 'react';
+'use client';
+
+import { useEffect, useState } from 'react';
 import Lottie from 'lottie-react';
 
 interface LottiePlayerProps {
-  animationData: object;
+  src: string;
   loop?: boolean;
-  autoplay?: boolean;
-  style?: React.CSSProperties;
+  className?: string;
 }
 
-export const LottiePlayer: FC<LottiePlayerProps> = ({
-  animationData,
-  loop = true,
-  autoplay = true,
-  style,
-}) => {
-  return (
-    <Lottie
-      animationData={animationData}
-      loop={loop}
-      autoplay={autoplay}
-      style={style}
-    />
-  );
-};
+export default function LottiePlayer({ src, loop = true, className }: LottiePlayerProps) {
+  const [animationData, setAnimationData] = useState<object | null>(null);
+
+  useEffect(() => {
+    fetch(src)
+      .then((res) => res.json())
+      .then((data) => setAnimationData(data))
+      .catch((err) => console.error('Erro ao carregar Lottie:', err));
+  }, [src]);
+
+  if (!animationData) return null;
+
+  return <Lottie animationData={animationData} loop={loop} className={className} />;
+}
