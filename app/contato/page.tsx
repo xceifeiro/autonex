@@ -67,14 +67,14 @@ export default function Contato() {
       </section>
 
       {/* Formulário e Informações */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-gradient-to-r from-blue-100 to-purple-100">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <div>
               <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 Fale Conosco
               </h2>
-              <p className="text-gray-600 mb-8">
+              <p className="text-gray-800 mb-8">
                 Preencha o formulário abaixo e nossa equipe entrará em contato em até 24 horas úteis. Estamos ansiosos
                 para entender seu negócio e como podemos ajudar.
               </p>
@@ -253,20 +253,24 @@ export default function Contato() {
                         <p className="text-gray-600">
                           Segunda a Sexta: 9h às 18h
                           <br />
-                          Sábado: 9h às 13h
+                          Sábado: 13h às 17h
                         </p>
                       </div>
                     </div>
                   </div>
 
                   <div className="mt-10 space-y-4">
-                    <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0 flex items-center justify-center gap-2">
+                    <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white 
+                    border-0 flex items-center justify-center gap-2"
+                    onClick={() => window.open("/consultoria#agendamento")}
+                    >
                       <Calendar className="h-5 w-5" />
                       <span>Agendar Demonstração</span>
                     </Button>
                     <Button
                       variant="outline"
                       className="w-full border-blue-600 text-blue-600 hover:bg-blue-50 flex items-center justify-center gap-2"
+                      onClick={() => window.open("https://api.whatsapp.com/send?phone=%205562993204235&text=%F0%9F%98%83+Ol%C3%A1+vim+atrav%C3%A9s+do+site%2C+gostaria+de+saber+mais+sobre+automa%C3%A7%C3%B5es...+%F0%9F%91%8B")}
                     >
                       <MessageSquare className="h-5 w-5" />
                       <span>Conversar no WhatsApp</span>

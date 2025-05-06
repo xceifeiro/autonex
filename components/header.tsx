@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { Result } from "postcss"
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -13,6 +14,13 @@ const Header = () => {
   const pathname = usePathname()
   const isDemoPage = pathname === "/demonstracao"
   const isHomePage = pathname === "/"
+  const isActiveHome = pathname === '/'
+  const isActiveSolucoes = pathname === '/solucoes'
+  const isActiveResultados = pathname === '/resultados'
+  const isActiveSobre = pathname === '/sobre'
+  const isActiveContato = pathname === '/contato'
+  const isActiveFullDigital = pathname === '/full-digital'
+  const isActiveBlog = pathname === '/blog'
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,9 +43,7 @@ const Header = () => {
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        isDemoPage
-          ? "bg-gradient-to-r from-blue-900 to-purple-900 shadow-md"
-          : scrolled
+        scrolled
             ? "bg-white/80 backdrop-blur-md shadow-md"
             : isHomePage
               ? "bg-gray-900/80 backdrop-blur-md md:bg-transparent"
@@ -46,34 +52,27 @@ const Header = () => {
     >
       <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
         <Link href="/" className="flex items-center gap-2 z-10">
-          <span
-            className={cn(
-              "text-2xl font-bold",
-              isDemoPage
-                ? "text-white"
-                : scrolled
-                  ? "bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
-                  : isHomePage
-                    ? "text-white"
-                    : "bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent",
-            )}
-          >
-            Auto<span className="font-extrabold">Nex</span>
-          </span>
+          <img
+            src={
+              scrolled
+                ? "/images/logo-azul-e-escura.png" // Imagem quando a página for rolada
+                : isHomePage
+                ? "/images/logo-branca.png" // Imagem para a página inicial
+                : "/images/logo-azul-e-escura.png" // Imagem padrão (caso não caia em nenhum dos casos)
+            }
+            alt="Logo AutoNex"
+            className="p-2 max-w-[200px] w-auto h-auto" // Tamanho da imagem
+          />
         </Link>
 
         <nav className="hidden md:flex gap-8">
           <Link
             href="/"
-            className={cn(
-              "text-sm font-medium transition-colors",
-              isDemoPage
-                ? "text-white hover:text-blue-200"
-                : scrolled
-                  ? "text-gray-800 hover:text-blue-600"
-                  : isHomePage
-                    ? "text-white hover:text-blue-300"
-                    : "text-gray-800 hover:text-blue-600",
+            className={cn( "text-sm font-medium transition-colors",
+              isActiveHome ? "bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent" :
+              scrolled ? "text-gray-800 hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-400 hover:bg-clip-text hover:text-transparent" : 
+              isHomePage ? "text-white hover:text-blue-300" :
+               "text-gray-800 hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-400 hover:bg-clip-text hover:text-transparent",
             )}
           >
             Home
@@ -82,43 +81,56 @@ const Header = () => {
             href="/solucoes"
             className={cn(
               "text-sm font-medium transition-colors",
-              isDemoPage
-                ? "text-white hover:text-blue-200"
-                : scrolled
-                  ? "text-gray-800 hover:text-blue-600"
+              isActiveSolucoes ? "bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent" :
+              scrolled
+                  ? "text-gray-800 hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-400 hover:bg-clip-text hover:text-transparent"
                   : isHomePage
-                    ? "text-white hover:text-blue-300"
-                    : "text-gray-800 hover:text-blue-600",
+                    ? "text-white hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-400 hover:bg-clip-text hover:text-transparent"
+                    : "text-gray-800 hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-400 hover:bg-clip-text hover:text-transparent",
             )}
           >
             Soluções
           </Link>
+          {/* Resultados Página COMENTADA 
           <Link
             href="/resultados"
             className={cn(
               "text-sm font-medium transition-colors",
-              isDemoPage
-                ? "text-white hover:text-blue-200"
-                : scrolled
-                  ? "text-gray-800 hover:text-blue-600"
+            isActiveResultados ? "bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent" :
+            scrolled
+                  ? "text-gray-800 hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-400 hover:bg-clip-text hover:text-transparent"
                   : isHomePage
-                    ? "text-white hover:text-blue-300"
-                    : "text-gray-800 hover:text-blue-600",
+                    ? "text-white hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-400 hover:bg-clip-text hover:text-transparent"
+                    : "text-gray-800 hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-400 hover:bg-clip-text hover:text-transparent",
+                    
             )}
           >
             Resultados
+          </Link>*/}
+          <Link
+            href="/blog"
+            className={cn(
+              "text-sm font-medium transition-colors",
+              isActiveBlog ? "bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent" :
+              scrolled
+                  ? "text-gray-800 hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-400 hover:bg-clip-text hover:text-transparent"
+                  : isHomePage
+                    ? "text-white hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-400 hover:bg-clip-text hover:text-transparent"
+                    : "text-gray-800 hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-400 hover:bg-clip-text hover:text-transparent",
+            )}
+          >
+            Blog
           </Link>
           <Link
             href="/sobre"
             className={cn(
               "text-sm font-medium transition-colors",
-              isDemoPage
-                ? "text-white hover:text-blue-200"
-                : scrolled
-                  ? "text-gray-800 hover:text-blue-600"
+              isActiveSobre ? "bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent" :
+              scrolled
+                  ? "text-gray-800 hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-400 hover:bg-clip-text hover:text-transparent"
                   : isHomePage
-                    ? "text-white hover:text-blue-300"
-                    : "text-gray-800 hover:text-blue-600",
+                    ? "text-white hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-400 hover:bg-clip-text hover:text-transparent"
+                    : "text-gray-800 hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-400 hover:bg-clip-text hover:text-transparent",
             )}
           >
             Sobre
@@ -127,44 +139,68 @@ const Header = () => {
             href="/contato"
             className={cn(
               "text-sm font-medium transition-colors",
-              isDemoPage
-                ? "text-white hover:text-blue-200"
-                : scrolled
-                  ? "text-gray-800 hover:text-blue-600"
+              isActiveContato ? "bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent" :
+              scrolled
+                  ? "text-gray-800 hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-400 hover:bg-clip-text hover:text-transparent"
                   : isHomePage
-                    ? "text-white hover:text-blue-300"
-                    : "text-gray-800 hover:text-blue-600",
+                    ? "text-white hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-400 hover:bg-clip-text hover:text-transparent"
+                    : "text-gray-800 hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-400 hover:bg-clip-text hover:text-transparent",
             )}
           >
             Contato
+          </Link>
+          <Link
+            href="/full-digital"
+            className={cn(
+              "text-sm font-medium transition-colors",
+              isActiveFullDigital ? "bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent" :
+              scrolled
+                  ? "text-gray-800 hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-400 hover:bg-clip-text hover:text-transparent"
+                  : isHomePage
+                    ? "text-white hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-400 hover:bg-clip-text hover:text-transparent"
+                    : "text-gray-800 hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-400 hover:bg-clip-text hover:text-transparent",
+            )}
+          >
+            Full Digital
           </Link>
         </nav>
 
         <div className="hidden md:flex">
           <Button
+            onClick={() => {
+              if (isDemoPage) {
+                window.scrollTo({ top: 0, behavior: "smooth" })
+              } else {
+                window.location.href = "/demonstracao"
+              }
+            }
+            }
             className={cn(
               "text-white border-0",
-              isDemoPage
-                ? "bg-white/20 backdrop-blur-sm hover:bg-white/30 border border-white/30"
-                : scrolled
+              scrolled
                   ? "bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
                   : isHomePage
-                    ? "bg-white/20 backdrop-blur-sm hover:bg-white/30 border border-white/30"
+                    ? "bg-white/20 backdrop-blur-sm hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-400 border border-white/30 hover:border-transparent"
                     : "bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700",
             )}
           >
             Quero Automatizar Meu Negócio
           </Button>
         </div>
+        
+        {/* Mobile Menu Button */}
 
         <button className="md:hidden z-10" onClick={toggleMenu} aria-label="Menu">
           {isMenuOpen ? (
-            <X className="h-6 w-6 text-white" />
+            <X className={cn(
+              "h-6 w-6",
+              scrolled ? "text-black" : isHomePage ? "text-white" : "text-gray-800",
+            )} />
           ) : (
             <Menu
               className={cn(
                 "h-6 w-6",
-                isDemoPage ? "text-white" : scrolled ? "text-gray-800" : isHomePage ? "text-white" : "text-gray-800",
+                scrolled ? "text-gray-800" : isHomePage ? "text-white" : "text-gray-800",
               )}
             />
           )}
@@ -174,41 +210,69 @@ const Header = () => {
       {isMenuOpen && (
         <div className="md:hidden fixed inset-x-0 top-20 bg-white z-0 rounded-b-xl shadow-lg max-h-[70vh] overflow-y-auto">
           <nav className="flex flex-col space-y-4 p-6">
-            <Link href="/" className="text-lg font-medium hover:text-blue-600 transition-colors" onClick={toggleMenu}>
+            <Link 
+            href="/" 
+            className={cn("text-lg font-medium hover:text-blue-600 transition-colors", isActiveHome ? "text-blue-600" : "text-black",)} 
+            onClick={toggleMenu}>
               Home
             </Link>
             <Link
               href="/solucoes"
-              className="text-lg font-medium hover:text-blue-600 transition-colors"
+              className={cn("text-lg font-medium hover:text-blue-600 transition-colors", isActiveSolucoes ? "text-blue-600" : "text-black",)}
               onClick={toggleMenu}
             >
               Soluções
             </Link>
+            {/* Resultados Página COMENTADA
             <Link
               href="/resultados"
-              className="text-lg font-medium hover:text-blue-600 transition-colors"
+              className={cn("text-lg font-medium hover:text-blue-600 transition-colors", isActiveResultados ? "text-blue-600" : "text-black",)}
               onClick={toggleMenu}
             >
               Resultados
             </Link>
+            */}
+            <Link
+              href="/blog"
+              className={cn("text-lg font-medium hover:text-blue-600 transition-colors", isActiveBlog ? "text-blue-600" : "text-black",)}
+              onClick={toggleMenu}
+            >
+              Blog
+            </Link>
             <Link
               href="/sobre"
-              className="text-lg font-medium hover:text-blue-600 transition-colors"
+              className={cn("text-lg font-medium hover:text-blue-600 transition-colors", isActiveSobre ? "text-blue-600" : "text-black",)}
               onClick={toggleMenu}
             >
               Sobre
             </Link>
             <Link
               href="/contato"
-              className="text-lg font-medium hover:text-blue-600 transition-colors"
+              className={cn("text-lg font-medium hover:text-blue-600 transition-colors", isActiveContato ? "text-blue-600" : "text-black",)}
               onClick={toggleMenu}
             >
               Contato
             </Link>
+            <Link
+              href="/full-digital"
+              className={cn("text-lg font-medium hover:text-blue-600 transition-colors", isActiveFullDigital ? "text-blue-600" : "text-black",)}
+              onClick={toggleMenu}
+            >
+              Full Digital
+            </Link>
             <div className="pt-4 border-t border-gray-200 mt-2">
               <Button
                 className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0 w-full"
-                onClick={toggleMenu}
+                onClick={() => {
+                  if (isDemoPage) {
+                    window.scrollTo({ top: 0, behavior: "smooth" })
+                    toggleMenu()
+                  } else {
+                    window.location.href = "/demonstracao"
+                    toggleMenu()
+                  }
+                }
+                }
               >
                 Quero Automatizar Meu Negócio
               </Button>

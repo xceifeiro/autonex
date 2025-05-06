@@ -90,7 +90,7 @@ export default function Demonstracao() {
   const closeChat = () => setIsChatOpen(false)
 
   return (
-    <div className="flex flex-col pt-20">
+    <div className="flex flex-col">
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-blue-900 to-purple-900 text-white py-20">
         <div className="container mx-auto px-4 md:px-6 text-center">

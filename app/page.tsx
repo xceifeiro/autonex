@@ -3,12 +3,16 @@
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { ArrowRight, Clock, DollarSign, Laptop, MessageSquare, Smartphone, Tablet } from "lucide-react"
+import { ArrowRight, Clock, DollarSign, Laptop, MessageSquare, Smartphone, Tablet, Bot, Globe, FileText, Instagram, Sparkles, CheckCircle, } from "lucide-react"
 import ParticlesBackground from "@/components/particles-background"
 import WhatsappChat from "@/components/chat/whatsapp-chat"
 import { useEffect, useState } from 'react'
 import Lottie from 'lottie-react'
-import { LottiePlayer } from '@/components/LottiePlayer'
+import Link from "next/link"
+import { Badge } from "@/components/ui/badge"
+import { Pricing } from "@/components/ui/pricing";
+
+
 
 export default function Home() {
   const [isChatOpen, setIsChatOpen] = useState(false)
@@ -156,8 +160,8 @@ export default function Home() {
         </div>
       </section> */}
 
-      {/* Benefits Section */}
-      <section className="py-20 bg-white">
+      {/* Beneficios Section */}
+      <section className="py-20 bg-gradient-to-r from-gray-300 to-gray-200">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
@@ -179,7 +183,7 @@ export default function Home() {
               </p>
               <div className="mt-6 p-4 bg-blue-50 rounded-lg">
                 <p className="text-blue-700 font-medium">
-                  Clientes relatam aumento médio de 43% nas vendas em apenas 3 meses.
+                  Aumento de faturamento por cliente e vendas novas, com atendimento 24/7.
                 </p>
               </div>
             </div>
@@ -193,7 +197,7 @@ export default function Home() {
                 Ofereça suporte instantâneo em qualquer horário sem aumentar sua equipe ou custos operacionais.
               </p>
               <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-                <p className="text-blue-700 font-medium">Mais de 200 atendimentos mensais fora do horário comercial.</p>
+                <p className="text-blue-700 font-medium">Tempo de espera para atendimento reduzido em até 98%</p>
               </div>
             </div>
 
@@ -225,7 +229,115 @@ export default function Home() {
         </div>
       </section>
 
-      {/* How It Works */}
+      {/* Full Digital Combo Section */}
+
+      <section className="py-20 bg-gradient-to-r from-blue-900 to-purple-900 text-white">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="relative mb-16">
+            <div className="absolute -top-10 -left-10 w-40 h-40 bg-blue-500 rounded-full opacity-10 blur-3xl"></div>
+            <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-purple-500 rounded-full opacity-10 blur-3xl"></div>
+
+            <div className="text-center relative z-10">
+              <Badge className="mb-4 bg-white/20 text-white px-4 py-1 text-sm rounded-full backdrop-blur-sm">
+                Novo Lançamento
+              </Badge>
+              <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white">
+                AutoNex{" "}
+                <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                  Full Digital
+                </span>
+              </h2>
+              <p className="text-xl text-blue-100 max-w-3xl mx-auto mb-8">
+                Automatize seu atendimento, site, blog e redes sociais em um único pacote integrado
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-6 mb-12">
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 flex flex-col items-center text-center hover:bg-white/15 transition-all duration-300">
+              <div className="bg-blue-600/30 p-4 rounded-full mb-4">
+                <Bot className="h-8 w-8 text-blue-200" />
+              </div>
+              <h3 className="text-lg font-bold mb-2">Robô Atendente</h3>
+              <p className="text-blue-100 text-sm">Atendimento com IA nos principais canais</p>
+            </div>
+
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 flex flex-col items-center text-center hover:bg-white/15 transition-all duration-300">
+              <div className="bg-purple-600/30 p-4 rounded-full mb-4">
+                <Sparkles className="h-8 w-8 text-purple-200" />
+              </div>
+              <h3 className="text-lg font-bold mb-2">Robô JAMES</h3>
+              <p className="text-blue-100 text-sm">Gestão de agenda, finanças e tarefas</p>
+            </div>
+
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 flex flex-col items-center text-center hover:bg-white/15 transition-all duration-300">
+              <div className="bg-blue-600/30 p-4 rounded-full mb-4">
+                <Globe className="h-8 w-8 text-blue-200" />
+              </div>
+              <h3 className="text-lg font-bold mb-2">Site Completo</h3>
+              <p className="text-blue-100 text-sm">Design responsivo e otimizado para conversão</p>
+            </div>
+
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 flex flex-col items-center text-center hover:bg-white/15 transition-all duration-300">
+              <div className="bg-purple-600/30 p-4 rounded-full mb-4">
+                <FileText className="h-8 w-8 text-purple-200" />
+              </div>
+              <h3 className="text-lg font-bold mb-2">Blog Automático</h3>
+              <p className="text-blue-100 text-sm">Geração de conteúdo sob demanda</p>
+            </div>
+
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 flex flex-col items-center text-center hover:bg-white/15 transition-all duration-300">
+              <div className="bg-blue-600/30 p-4 rounded-full mb-4">
+                <Instagram className="h-8 w-8 text-blue-200" />
+              </div>
+              <h3 className="text-lg font-bold mb-2">Redes Sociais</h3>
+              <p className="text-blue-100 text-sm">Postagens automáticas integradas ao blog</p>
+            </div>
+          </div>
+
+          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 md:p-10 max-w-4xl mx-auto">
+            <div className="flex flex-col md:flex-row items-center justify-between">
+              <div className="mb-6 md:mb-0 md:mr-8">
+                <h3 className="text-2xl font-bold mb-4">Tudo o que sua empresa precisa em um único pacote</h3>
+                <ul className="space-y-3">
+                  <li className="flex items-start">
+                    <CheckCircle className="h-5 w-5 text-green-400 mr-2 shrink-0 mt-0.5" />
+                    <span>Economize até 70% em custos operacionais</span>
+                  </li>
+                  <li className="flex items-start">
+                    <CheckCircle className="h-5 w-5 text-green-400 mr-2 shrink-0 mt-0.5" />
+                    <span>Aumente suas vendas com atendimento 24/7</span>
+                  </li>
+                  <li className="flex items-start">
+                    <CheckCircle className="h-5 w-5 text-green-400 mr-2 shrink-0 mt-0.5" />
+                    <span>Gere conteúdo de qualidade sem esforço</span>
+                  </li>
+                  <li className="flex items-start">
+                    <CheckCircle className="h-5 w-5 text-green-400 mr-2 shrink-0 mt-0.5" />
+                    <span>Mantenha presença constante nas redes sociais</span>
+                  </li>
+                </ul>
+              </div>
+              <div className="flex flex-col items-center text-center">
+                <div className="bg-white/20 backdrop-blur-sm px-6 py-2 rounded-full mb-4">
+                  <span className="text-sm font-medium">A partir de</span>
+                  <br/>
+                  <span className="text-2xl font-bold ml-2">{Pricing("Plano_01")}</span>
+                  <span className="text-sm">/mês</span>
+                </div>
+                <Link href="/full-digital" passHref>
+                  <Button className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white border-0 text-lg px-8 py-6 h-auto w-full">
+                    Conhecer Planos
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Como Funciona Section */}
       <section className="py-20 bg-gradient-to-r from-gray-300 to-gray-200">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-12">
@@ -427,6 +539,7 @@ export default function Home() {
             <Button
               size="lg"
               className="bg-white text-blue-900 hover:bg-gray-100 text-base sm:text-lg px-6 py-4 sm:py-5 h-auto"
+              onClick={() => window.location.href = "/demonstracao"}
             >
               Quero Automatizar Meu Negócio
             </Button>

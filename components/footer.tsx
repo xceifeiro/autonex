@@ -1,6 +1,10 @@
+"use client"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from "lucide-react"
+import { useState } from "react";
+
+
 
 const Footer = () => {
   return (
@@ -8,9 +12,13 @@ const Footer = () => {
       <div className="container mx-auto px-4 py-12 md:py-16">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           <div>
-            <h3 className="text-xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-              AutoNex
-            </h3>
+            <Link href="/" className="flex items-center mb-4">
+              <img
+                src={"/images/logo-branca.png"}
+                alt="Logo AutoNex"
+                className="p-2 max-w-[200px] w-auto h-auto" // Tamanho da imagem
+              />
+            </Link>
             <p className="text-gray-400 mb-4">
               Simplificamos o crescimento do seu negócio com automação inteligente e acessível.
             </p>
@@ -43,9 +51,16 @@ const Footer = () => {
                   Soluções
                 </Link>
               </li>
+              {/* RESULTADOS LINK COMENTADO
               <li>
                 <Link href="/resultados" className="text-gray-400 hover:text-white transition-colors">
                   Resultados
+                </Link>
+              </li>
+              */}
+              <li>
+                <Link href="/blog" className="text-gray-400 hover:text-white transition-colors">
+                  Blog
                 </Link>
               </li>
               <li>
@@ -56,6 +71,11 @@ const Footer = () => {
               <li>
                 <Link href="/contato" className="text-gray-400 hover:text-white transition-colors">
                   Contato
+                </Link>
+              </li>
+              <li>
+                <Link href="/full-digital" className="text-gray-400 hover:text-white transition-colors">
+                  Full Digital
                 </Link>
               </li>
             </ul>
@@ -108,8 +128,10 @@ const Footer = () => {
                 <span className="text-gray-400">Rua Inglaterra, n° 108, Santa Isabel, Anápolis/GO</span>
               </li>
             </ul>
-            <Button className="mt-6 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0">
-              Agendar uma Consultoria Gratuita
+            <Button 
+            className="mt-6 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0"
+            onClick={() => { window.location.href = "/consultoria#agendamento";}}
+            > Agendar uma Consultoria Gratuita
             </Button>
           </div>
         </div>
