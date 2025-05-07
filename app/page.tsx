@@ -150,7 +150,7 @@ export default function Home() {
               Benefícios da Automação
             </h2>
             <p className="text-lg text-gray-700 max-w-3xl mx-auto">
-              Transforme seu negócio com soluções que aumentam resultados e reduzem esforço manual
+              Transforme seu negócio com soluções que aumentem resultados e reduzem esforço manual
             </p>
           </div>
 

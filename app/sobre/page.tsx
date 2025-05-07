@@ -62,7 +62,7 @@ export default function Sobre() {
                   alt="Missão da AutoNex"
                   width={500}
                   height={500}
-                  className="max-w-[500px]"
+                  className="max-w-[430px] md:max-w-[500px]"
                 />
               </div>
             </div>

@@ -73,6 +73,11 @@
   body {
     @apply bg-background text-foreground;
   }
+  /* Prevenir scroll horizontal em todas as páginas */
+  html,
+  body {
+    @apply overflow-x-hidden max-w-full;
+  }
 }
 
 /* Animações */
@@ -130,4 +135,18 @@
 /* Esconder o footer nas páginas administrativas */
 .admin-layout + footer {
   display: none;
+}
+
+/* Corrigir problemas de layout responsivo */
+.container {
+  @apply px-4 md:px-6 w-full;
+}
+
+/* Garantir que elementos não causem overflow horizontal */
+img,
+svg,
+video,
+canvas,
+iframe {
+  @apply max-w-full;
 }

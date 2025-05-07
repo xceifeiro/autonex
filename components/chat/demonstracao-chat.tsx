@@ -6,22 +6,14 @@ import { useState, useEffect, useRef } from "react"
 import { Send, X, Check, CheckCheck } from "lucide-react"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
-
-interface Message {
-  id: string
-  text: string
-  sender: "user" | "bot"
-  timestamp: Date
-  status: "sending" | "sent" | "delivered" | "read"
-}
-
-interface BusinessInfo {
-  nome: string
-  empresa: string
-  segmento: string
-  desafios: string
-  canais: string
-}
+import {
+  type Message,
+  type BusinessInfo,
+  sendMessageToN8N,
+  generateSessionId,
+  generateUserId,
+  getWelcomeMessage,
+} from "@/lib/chat-utils"
 
 interface DemonstracaoChatProps {
   isOpen?: boolean
