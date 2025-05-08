@@ -171,7 +171,7 @@ const Header = () => {
               if (isDemoPage) {
                 window.scrollTo({ top: 0, behavior: "smooth" })
               } else {
-                window.location.href = "/demonstracao"
+                window.location.href = "/solucoes"
               }
             }
             }
@@ -268,7 +268,7 @@ const Header = () => {
                     window.scrollTo({ top: 0, behavior: "smooth" })
                     toggleMenu()
                   } else {
-                    window.location.href = "/demonstracao"
+                    window.location.href = "/solucoes"
                     toggleMenu()
                   }
                 }

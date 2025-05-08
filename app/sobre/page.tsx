@@ -347,9 +347,9 @@ export default function Sobre() {
               size="lg"
               variant="outline"
               className="text-gray-700 border-0 bg-white/90 hover:bg-white/80 text-lg px-8 py-6 h-auto"
-              onClick={() => window.location.href = "/demonstracao"}
+              onClick={() => window.location.href = "/full-digital"}
             >
-              Ir para página de demonstração
+              Conhecer Plano Full Digital
             </Button>
             <Button
               size="lg"

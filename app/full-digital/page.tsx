@@ -6,32 +6,14 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import {
-  ArrowRight,
-  CheckCircle,
-  Bot,
-  Sparkles,
-  Globe,
-  FileText,
-  Instagram,
-  MessageSquare,
-  Calendar,
-  Zap,
-  Clock,
-  BarChart3,
-  CheckCheck,
-  X,
-  DollarSign,
-} from "lucide-react"
-import WhatsappChat from "@/components/chat/whatsapp-chat"
+import { ArrowRight, CheckCircle, Bot, Sparkles, Globe, FileText, Instagram, MessageSquare, Calendar, Zap, Clock, BarChart3, CheckCheck, X, DollarSign,} from "lucide-react"
 import { Pricing } from "@/components/ui/pricing"
 import ComponentLinkWhatsApp from "@/components/LinkWhats"
+import { useChat } from "@/components/chat-widget/context"
+
 
 export default function FullDigitalPage() {
-  const [isChatOpen, setIsChatOpen] = useState(false)
-
-  const openChat = () => setIsChatOpen(true)
-  const closeChat = () => setIsChatOpen(false)
+  const { openChat } = useChat()
 
   return (
     <div className="flex flex-col">
@@ -855,15 +837,6 @@ export default function FullDigitalPage() {
           </div>
         </div>
       </section>
-
-      {/* WhatsApp Chat Component */}
-      <WhatsappChat
-        webhookUrl="https://your-n8n-webhook-url.com"
-        botName="AutoNex Assistente"
-        initialMessage="👋 Olá! Sou o assistente virtual da AutoNex. Como posso ajudar você com o pacote Full Digital? Experimente perguntar sobre preços, funcionalidades ou agendar uma demonstração."
-        isOpen={isChatOpen}
-        onClose={closeChat}
-      />
     </div>
   )
 }

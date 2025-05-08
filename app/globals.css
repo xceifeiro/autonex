@@ -150,3 +150,29 @@ canvas,
 iframe {
   @apply max-w-full;
 }
+
+/* Estilização da barra de rolagem - versão mais elegante */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;               /* largura da barra de rolagem */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(241, 245, 249, 0);    /* cor do fundo da trilha */
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(0, 97, 253, 1);    /* cor da barra de rolagem */
+  border-radius: 10px;
+  transition: all 0.3s;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(136, 16, 136, 0.8);    /* cor ao passar o mouse */
+}
+
+/* Para Firefox */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(59, 130, 246, 1) rgba(241, 245, 249, 0);
+}

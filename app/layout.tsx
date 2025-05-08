@@ -1,10 +1,12 @@
 // app/layout.tsx
-import { Inter } from "next/font/google";
+import { Inter } from 'next/font/google';
 import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import ConditionalHeader from "@/components/ConditionalHeader";
 import Footer from "@/components/footer";
+import { ChatProvider } from "@/components/chat-widget/context";
+import { ChatWidget } from "@/components/chat-widget/chat-widget";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,11 +32,14 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className="overflow-x-hidden">
       <body className={`${inter.className} overflow-x-hidden`}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          <ConditionalHeader />
-          <main className="min-h-screen overflow-x-hidden">{children}</main>
-          <Footer />
-        </ThemeProvider>
+        <ChatProvider>
+          <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+            <ConditionalHeader />
+            <main className="min-h-screen overflow-x-hidden">{children}</main>
+            <Footer />
+            <ChatWidget />
+          </ThemeProvider>
+        </ChatProvider>
       </body>
     </html>
   );

@@ -5,22 +5,22 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { ArrowRight, Clock, DollarSign, Laptop, MessageSquare, Smartphone, Tablet, Bot, Globe, FileText, Instagram, Sparkles, CheckCircle, } from "lucide-react"
 import ParticlesBackground from "@/components/particles-background"
-import WhatsappChat from "@/components/chat/whatsapp-chat"
 import { useState } from 'react'
 import Link from "next/link"
 import { Badge } from "@/components/ui/badge"
 import { Pricing } from "@/components/ui/pricing"
 import dynamic from 'next/dynamic';
+import { useChat } from "@/components/chat-widget/context"
+
+
 
 const LottiePlayer = dynamic(() => import('@/components/LottiePlayer'), {
   ssr: false,
 });
 
 export default function Home() {
-  const [isChatOpen, setIsChatOpen] = useState(false)
+  const { openChat } = useChat()
 
-  const openChat = () => setIsChatOpen(true)
-  const closeChat = () => setIsChatOpen(false)
 
   return (
     <div className="flex flex-col">
@@ -59,6 +59,7 @@ export default function Home() {
               <Button
                 size="lg"
                 className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0 text-lg px-6 py-5 h-auto"
+                onClick={() => window.location.href = "/full-digital"}
               >
                 Quero Automatizar Meu Negócio
               </Button>
@@ -521,7 +522,7 @@ export default function Home() {
             <Button
               size="lg"
               className="bg-white text-blue-900 hover:bg-gray-100 text-base sm:text-lg px-6 py-4 sm:py-5 h-auto"
-              onClick={() => window.location.href = "/demonstracao"}
+              onClick={() => window.location.href = "/solucoes"}
             >
               Quero Automatizar Meu Negócio
             </Button>
@@ -536,15 +537,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* WhatsApp Chat Component */}
-      <WhatsappChat
-        webhookUrl="https://your-n8n-webhook-url.com"
-        botName="AutoNex Assistente"
-        initialMessage="👋 Olá! Sou o assistente virtual da AutoNex. Como posso ajudar você hoje? Experimente perguntar sobre automação, preços ou agendar uma demonstração."
-        isOpen={isChatOpen}
-        onClose={closeChat}
-      />
     </div>
   )
 }
