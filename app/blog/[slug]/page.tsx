@@ -96,6 +96,10 @@ export default function BlogPostPage() {
           <div className="flex items-center justify-center text-white/80">
             <Calendar className="h-4 w-4 mr-1" />
             <span className="mr-4">{post.date}</span>
+            {/* Tempo de Leitura}
+            <Clock className="h-4 w-4 mr-1" />
+            <span>{post.readTime}</span>
+            */}
           </div>
         </div>
       </section>

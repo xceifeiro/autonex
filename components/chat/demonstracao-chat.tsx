@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { useState, useEffect, useRef } from "react"
-import { Send, X, Check, CheckCheck } from "lucide-react"
+import { Send, X, Check, CheckCheck, Bug } from "lucide-react"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
 import {
@@ -25,8 +25,35 @@ export default function DemonstracaoChat({ isOpen = false, onClose, businessInfo
   const [messages, setMessages] = useState<Message[]>([])
   const [inputValue, setInputValue] = useState("")
   const [isTyping, setIsTyping] = useState(false)
+  const [userId, setUserId] = useState<string>("")
+  const [sessionId, setSessionId] = useState<string>("")
+  const [debugMode, setDebugMode] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
+
+  // Função de depuração para exibir informações detalhadas no console
+  const debugLog = (label: string, data: any) => {
+    if (!debugMode) return
+
+    console.log(`🔍 DEBUG [${label}]:`, JSON.stringify(data, null, 2))
+
+    if (label === "N8N_RESPONSE" && data?.response) {
+      console.log(
+        "%c📩 MENSAGEM COMPLETA DO N8N",
+        "background: #4CAF50; color: white; padding: 4px; border-radius: 4px;",
+      )
+      console.log(
+        "%c" + JSON.stringify(data.response, null, 2),
+        "background: #E8F5E9; color: #2E7D32; padding: 8px; border-radius: 4px; font-family: monospace;",
+      )
+    }
+  }
+
+  // Inicializar IDs de usuário e sessão
+  useEffect(() => {
+    setUserId(generateUserId())
+    setSessionId(generateSessionId())
+  }, [])
 
   // Determina o avatar e nome do bot com base no canal selecionado
   const getBotAvatar = () => {
@@ -61,42 +88,23 @@ export default function DemonstracaoChat({ isOpen = false, onClose, businessInfo
     return `${businessInfo.empresa} (${canalName})`
   }
 
-  // Gera a mensagem de boas-vindas personalizada com base nas informações do negócio
-  const getWelcomeMessage = () => {
-    const segmentoName =
-      businessInfo.segmento === "ecommerce"
-        ? "e-commerce"
-        : businessInfo.segmento === "servicos"
-          ? "prestação de serviços"
-          : businessInfo.segmento === "saude"
-            ? "saúde"
-            : businessInfo.segmento === "educacao"
-              ? "educação"
-              : businessInfo.segmento === "alimentacao"
-                ? "alimentação"
-                : businessInfo.segmento === "varejo"
-                  ? "varejo"
-                  : "seu segmento"
-
-    return `👋 Olá ${businessInfo.nome}! Bem-vindo(a) ao atendimento automático da ${businessInfo.empresa}. Como posso ajudar você hoje com sua empresa de ${segmentoName}? Você pode perguntar sobre nossos produtos, serviços, horários de atendimento ou qualquer outra informação.`
-  }
-
   // Inicializa o chat com a mensagem de boas-vindas
   useEffect(() => {
-    if (messages.length === 0) {
+    if (messages.length === 0 && userId && sessionId) {
       const welcomeMessage: Message = {
         id: Date.now().toString(),
-        text: getWelcomeMessage(),
+        text: getWelcomeMessage(businessInfo),
         sender: "bot",
         timestamp: new Date(),
         status: "read",
       }
       setMessages([welcomeMessage])
     }
-  }, [messages.length, businessInfo])
+  }, [messages.length, businessInfo, userId, sessionId])
 
   // Rola para a última mensagem quando novas mensagens são adicionadas
   useEffect(() => {
+    console.log("Mensagens atualizadas:", messages)
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
   }, [messages])
 
@@ -117,8 +125,13 @@ export default function DemonstracaoChat({ isOpen = false, onClose, businessInfo
     }
   }
 
+  const toggleDebugMode = () => {
+    setDebugMode(!debugMode)
+    console.log(`Modo de depuração ${!debugMode ? "ativado" : "desativado"}`)
+  }
+
   const sendMessage = async () => {
-    if (!inputValue.trim()) return
+    if (!inputValue.trim() || !userId || !sessionId) return
 
     const userMessage: Message = {
       id: Date.now().toString(),
@@ -131,132 +144,123 @@ export default function DemonstracaoChat({ isOpen = false, onClose, businessInfo
     setMessages((prev) => [...prev, userMessage])
     setInputValue("")
 
-    // Simula o envio para o webhook
+    // Atualiza o status da mensagem para "enviado"
+    setTimeout(() => {
+      setMessages((prev) => prev.map((msg) => (msg.id === userMessage.id ? { ...msg, status: "sent" } : msg)))
+    }, 500)
+
+    // Atualiza o status da mensagem para "entregue"
+    setTimeout(() => {
+      setMessages((prev) => prev.map((msg) => (msg.id === userMessage.id ? { ...msg, status: "delivered" } : msg)))
+    }, 1000)
+
+    // Simula o bot digitando
+    setIsTyping(true)
+    debugLog("ENVIANDO_MENSAGEM", { mensagem: inputValue, userId, sessionId })
+
     try {
-      // Atualiza o status da mensagem para "enviado"
-      setTimeout(() => {
-        setMessages((prev) => prev.map((msg) => (msg.id === userMessage.id ? { ...msg, status: "sent" } : msg)))
-      }, 500)
+      console.log("Enviando mensagem para o n8n:", inputValue)
 
-      // Atualiza o status da mensagem para "entregue"
-      setTimeout(() => {
-        setMessages((prev) => prev.map((msg) => (msg.id === userMessage.id ? { ...msg, status: "delivered" } : msg)))
-      }, 1000)
+      // Enviar mensagem para o n8n através do nosso endpoint
+      const result = await sendMessageToN8N(inputValue, userId, sessionId, businessInfo)
 
-      // Simula o bot digitando
-      setIsTyping(true)
+      debugLog("N8N_RESPONSE", result)
 
-      // Simula uma resposta do bot após um tempo
-      setTimeout(() => {
-        setIsTyping(false)
+      // Atualiza o status da mensagem do usuário para "lida"
+      setMessages((prev) => prev.map((msg) => (msg.id === userMessage.id ? { ...msg, status: "read" } : msg)))
 
-        // Atualiza o status da mensagem do usuário para "lida"
-        setMessages((prev) => prev.map((msg) => (msg.id === userMessage.id ? { ...msg, status: "read" } : msg)))
+      // Processa a resposta do n8n
+      if (result.success && result.response) {
+        console.log("Processando resposta bem-sucedida:", result.response)
+        debugLog("PROCESSANDO_RESPOSTA", result.response)
+
+        // Extrair a mensagem da resposta
+        let responseText = ""
+        let source = "desconhecido"
+
+        if (typeof result.response === "string") {
+          responseText = result.response
+          debugLog("RESPOSTA_TIPO_STRING", responseText)
+        } else if (result.response.message) {
+          responseText = result.response.message
+          source = result.response.source || "message"
+          debugLog("RESPOSTA_COM_MESSAGE", responseText)
+        } else if (result.response.response?.text) {
+          responseText = result.response.response.text
+          source = "response.text"
+          debugLog("RESPOSTA_COM_RESPONSE_TEXT", responseText)
+        } else if (result.response.text) {
+          responseText = result.response.text
+          source = "text"
+          debugLog("RESPOSTA_COM_TEXT", responseText)
+        } else if (result.response.content) {
+          responseText = result.response.content
+          source = "content"
+          debugLog("RESPOSTA_COM_CONTENT", responseText)
+        } else {
+          responseText = "Entendi sua mensagem. Como posso ajudar?"
+          source = "fallback"
+          debugLog("RESPOSTA_FALLBACK", { motivo: "Formato desconhecido", resposta: result.response })
+        }
+
+        console.log("Texto da resposta extraído:", responseText)
+        console.log("Fonte da resposta:", source)
 
         // Adiciona a resposta do bot
         const botResponse: Message = {
           id: Date.now().toString(),
-          text: getBotResponse(inputValue, businessInfo),
+          text: responseText,
           sender: "bot",
           timestamp: new Date(),
           status: "read",
+          metadata: {
+            ...result.response.metadata,
+            source,
+            debug: debugMode,
+          },
         }
 
+        setIsTyping(false)
         setMessages((prev) => [...prev, botResponse])
-      }, 2000)
+        debugLog("MENSAGEM_BOT_ADICIONADA", botResponse)
+      } else {
+        // Se houve um erro, mostramos uma mensagem de fallback
+        const errorResponse: Message = {
+          id: Date.now().toString(),
+          text: "Desculpe, tive um problema ao processar sua mensagem. Poderia tentar novamente?",
+          sender: "bot",
+          timestamp: new Date(),
+          status: "read",
+          metadata: {
+            error: true,
+            source: "error-handler",
+          },
+        }
+
+        setIsTyping(false)
+        setMessages((prev) => [...prev, errorResponse])
+        debugLog("ERRO_PROCESSAMENTO", { erro: "Resposta inválida", resultado: result })
+      }
     } catch (error) {
       console.error("Erro ao enviar mensagem:", error)
-    }
-  }
+      debugLog("ERRO_ENVIO", { erro: String(error) })
 
-  // Função para gerar respostas simuladas do bot com base nas informações do negócio
-  const getBotResponse = (message: string, info: BusinessInfo): string => {
-    const lowerMessage = message.toLowerCase()
-    const empresa = info.empresa
-    const segmento = info.segmento
-
-    // Respostas personalizadas com base no segmento
-    if (segmento === "ecommerce") {
-      if (lowerMessage.includes("entrega") || lowerMessage.includes("prazo") || lowerMessage.includes("frete")) {
-        return `Na ${empresa}, realizamos entregas para todo o Brasil. O prazo médio é de 3 a 7 dias úteis, dependendo da sua localização. Posso verificar o prazo exato para seu CEP. Poderia me informar?`
+      // Mensagem de erro em caso de falha
+      const errorResponse: Message = {
+        id: Date.now().toString(),
+        text: "Desculpe, ocorreu um erro de conexão. Por favor, tente novamente mais tarde.",
+        sender: "bot",
+        timestamp: new Date(),
+        status: "read",
+        metadata: {
+          error: true,
+          source: "exception-handler",
+        },
       }
 
-      if (lowerMessage.includes("devolução") || lowerMessage.includes("troca") || lowerMessage.includes("garantia")) {
-        return `A ${empresa} oferece 30 dias para trocas e devoluções. Para iniciar o processo, basta enviar o código do seu pedido e o motivo da devolução. Posso ajudar com isso agora?`
-      }
-
-      if (lowerMessage.includes("produto") || lowerMessage.includes("estoque") || lowerMessage.includes("disponível")) {
-        return `Temos diversos produtos disponíveis em nosso catálogo. Você está procurando algo específico? Posso verificar a disponibilidade e enviar o link direto para você.`
-      }
+      setIsTyping(false)
+      setMessages((prev) => [...prev, errorResponse])
     }
-
-    if (segmento === "saude") {
-      if (lowerMessage.includes("consulta") || lowerMessage.includes("horário") || lowerMessage.includes("agenda")) {
-        return `Na ${empresa}, temos horários disponíveis para consultas de segunda a sexta, das 8h às 18h, e aos sábados das 8h às 12h. Gostaria de agendar uma consulta? Posso verificar as próximas datas disponíveis.`
-      }
-
-      if (lowerMessage.includes("convênio") || lowerMessage.includes("plano") || lowerMessage.includes("particular")) {
-        return `A ${empresa} atende os principais convênios médicos, como Unimed, Bradesco Saúde, Amil e SulAmérica, além de consultas particulares. Qual é o seu convênio? Posso verificar se atendemos.`
-      }
-    }
-
-    if (segmento === "alimentacao") {
-      if (lowerMessage.includes("cardápio") || lowerMessage.includes("menu") || lowerMessage.includes("prato")) {
-        return `O cardápio da ${empresa} é atualizado semanalmente. Nossos destaques desta semana são: Prato Executivo (R$39,90), Salada Premium (R$32,90) e nossa Sobremesa Especial (R$18,90). Gostaria de ver o cardápio completo?`
-      }
-
-      if (lowerMessage.includes("reserva") || lowerMessage.includes("mesa")) {
-        return `Para fazer uma reserva na ${empresa}, precisamos saber a data, horário e número de pessoas. Quando você gostaria de nos visitar?`
-      }
-
-      if (lowerMessage.includes("delivery") || lowerMessage.includes("entrega") || lowerMessage.includes("pedido")) {
-        return `A ${empresa} realiza entregas todos os dias, das 11h às 22h. O tempo médio de entrega é de 30 a 45 minutos, dependendo da sua localização. Gostaria de fazer um pedido agora?`
-      }
-    }
-
-    // Respostas genéricas para qualquer segmento
-    if (
-      lowerMessage.includes("olá") ||
-      lowerMessage.includes("oi") ||
-      lowerMessage.includes("bom dia") ||
-      lowerMessage.includes("boa tarde") ||
-      lowerMessage.includes("boa noite")
-    ) {
-      return `Olá! Como posso ajudar você hoje com a ${empresa}? 😊`
-    }
-
-    if (
-      lowerMessage.includes("preço") ||
-      lowerMessage.includes("valor") ||
-      lowerMessage.includes("custo") ||
-      lowerMessage.includes("plano")
-    ) {
-      return `Na ${empresa}, temos diversas opções de preços e planos para atender às suas necessidades. Posso te enviar nossa tabela de preços atualizada. Você tem interesse em algum produto ou serviço específico?`
-    }
-
-    if (
-      lowerMessage.includes("contato") ||
-      lowerMessage.includes("falar") ||
-      lowerMessage.includes("atendente") ||
-      lowerMessage.includes("humano")
-    ) {
-      return `Claro! Posso transferir você para um de nossos consultores da ${empresa}. Qual seria o melhor horário para entrarmos em contato? Ou prefere que eu agende uma ligação agora?`
-    }
-
-    if (lowerMessage.includes("horário") || lowerMessage.includes("funcionamento") || lowerMessage.includes("aberto")) {
-      return `A ${empresa} funciona de segunda a sexta, das 9h às 18h, e aos sábados das 9h às 13h. Posso ajudar com mais alguma informação?`
-    }
-
-    if (lowerMessage.includes("endereço") || lowerMessage.includes("localização") || lowerMessage.includes("onde")) {
-      return `A ${empresa} está localizada na Av. Principal, 1500, Centro. Temos estacionamento próprio e estamos próximos à estação de metrô Central. Posso enviar o link da localização no Google Maps se desejar.`
-    }
-
-    if (lowerMessage.includes("obrigado") || lowerMessage.includes("obrigada") || lowerMessage.includes("valeu")) {
-      return `Por nada! Foi um prazer ajudar. A ${empresa} agradece seu contato. Tem mais alguma dúvida que eu possa esclarecer?`
-    }
-
-    // Resposta padrão
-    return `Entendi sua pergunta sobre "${inputValue}". Na ${empresa}, buscamos sempre oferecer as melhores soluções para nossos clientes. Posso fornecer mais detalhes sobre isso ou ajudar com alguma outra informação específica?`
   }
 
   // Renderiza o status da mensagem
@@ -320,6 +324,13 @@ export default function DemonstracaoChat({ isOpen = false, onClose, businessInfo
           <h3 className="font-medium text-white">{getBotName()}</h3>
           <p className="text-xs text-white text-opacity-80">Online</p>
         </div>
+        <button
+          onClick={toggleDebugMode}
+          className="text-white hover:text-opacity-80 mr-2"
+          title={debugMode ? "Desativar modo de depuração" : "Ativar modo de depuração"}
+        >
+          <Bug className="h-4 w-4" />
+        </button>
         <button onClick={onClose} className="text-white hover:text-opacity-80">
           <X className="h-5 w-5" />
         </button>
@@ -347,6 +358,11 @@ export default function DemonstracaoChat({ isOpen = false, onClose, businessInfo
               </span>
               {message.sender === "user" && renderMessageStatus(message.status)}
             </div>
+            {debugMode && message.metadata && (
+              <div className="mt-1 text-[10px] text-gray-500 border-t border-gray-200 pt-1">
+                <span className="font-bold">Fonte:</span> {message.metadata.source || "N/A"}
+              </div>
+            )}
           </div>
         ))}
 

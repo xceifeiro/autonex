@@ -12,6 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { CheckCircle, MessageSquare, CheckCheck, Smartphone, Globe, Instagram } from "lucide-react"
 import DemonstracaoChat from "@/components/chat/demonstracao-chat"
 import ComponentLinkWhatsApp from "@/components/LinkWhats"
+import { toast } from "@/components/ui/use-toast"
 
 export default function Demonstracao() {
   const [isChatOpen, setIsChatOpen] = useState(false)
@@ -47,9 +48,8 @@ export default function Demonstracao() {
 
     try {
       // Enviar dados para o webhook do N8N
-      const webhookUrl = "https://your-n8n-webhook-url.com" // Substitua pela URL real do seu webhook N8N
-
-      const response = await fetch(webhookUrl, {
+      // Em vez de chamar o N8N diretamente, vamos usar nosso endpoint intermediário
+      const response = await fetch("/api/business-info", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -60,17 +60,35 @@ export default function Demonstracao() {
           timestamp: new Date().toISOString(),
           source: "demonstracao_page",
         }),
-      }).catch((error) => {
-        // Em caso de erro na requisição, apenas logamos o erro
-        // mas continuamos o fluxo para não bloquear a experiência do usuário
-        console.error("Erro ao enviar dados para N8N:", error)
       })
 
-      // Mesmo se houver erro na requisição, continuamos o fluxo
+      if (!response.ok) {
+        throw new Error(`Erro na requisição: ${response.status} ${response.statusText}`)
+      }
+
+      // Avança para o próximo passo e abre o chat
       setCurrentStep(1)
       setIsChatOpen(true)
+      // Notifica o usuário sobre o sucesso
+      toast({
+        title: "Informações enviadas com sucesso!",
+        description: "Agora você pode interagir com nosso assistente virtual.",
+        variant: "default",
+      })
+
     } catch (error) {
       console.error("Erro ao processar formulário:", error)
+      // Notifica o usuário sobre o erro, mas continua o fluxo
+      toast({
+        title: "Aviso",
+        description: "Houve um problema ao enviar seus dados, mas você pode continuar com a demonstração.",
+        variant: "destructive",
+      })
+
+      // Mesmo com erro, avançamos para o chat para não bloquear a experiência
+      setCurrentStep(1)
+      setIsChatOpen(true)
+
     } finally {
       setIsSubmitting(false)
     }
