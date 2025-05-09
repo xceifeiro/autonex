@@ -1,4 +1,5 @@
-// components/chat-widget/chat-widget.tsx
+// Em components/chat-widget/chat-widget.tsx
+
 "use client"
 
 import { useEffect, useState } from "react"
@@ -28,7 +29,6 @@ export function ChatWidget() {
   /* ===================================
    * FUNÇÃO PARA LIMPAR O CHAT
    * ===================================
-   * Reinicia a conversa removendo dados do localStorage
    */
   const clearChat = () => {
     if (typeof window === "undefined") return
@@ -80,33 +80,33 @@ export function ChatWidget() {
       {/* === CONTAINER DO CHAT === */}
       <div
         className={cn(
-          "bg-slate-100 rounded-t-xl rounded-b-xl shadow-xl transition-all duration-300 ease-in-out transform mb-2 mr-4 overflow-hidden",
+          "bg-slate-100 rounded-t-xl rounded-b-xl shadow-xl transition-all duration-500 ease-out transform mb-2 mr-4 overflow-hidden",
           isChatOpen
             ? "opacity-100 translate-y-0 h-[500px] max-h-[80vh] w-[350px] sm:w-[380px]"
-            : "opacity-0 translate-y-[120%] h-0 w-0",
+            : "opacity-0 translate-y-[20px] h-0 w-[350px] sm:w-[380px]" // Mantém a largura consistente
         )}
         style={{
           boxShadow: "0 10px 25px -5px rgba(59, 130, 246, 0.4)",
+          willChange: "transform, opacity, height", // Otimiza a animação
         }}
       >
-        {isChatOpen && (
-          <>
-            <ChatContent onClose={() => toggleChat()} />
+        {/* Renderiza o conteúdo sempre, mas esconde quando fechado */}
+        <div className={`h-full ${isChatOpen ? 'block' : 'hidden'}`}>
+          <ChatContent onClose={() => toggleChat()} />
 
-            {/* === BOTÃO PARA LIMPAR O CHAT === */}
-            {hasSavedChat() && (
-              <Button
-                onClick={clearChat}
-                variant="ghost"
-                size="sm"
-                className="absolute top-3 right-12 z-20 text-white/70 hover:text-white hover:bg-white/10"
-              >
-                <RotateCcw className="h-4 w-4 mr-1" />
-                <span className="text-xs">Reiniciar</span>
-              </Button>
-            )}
-          </>
-        )}
+          {/* === BOTÃO PARA LIMPAR O CHAT === */}
+          {hasSavedChat() && (
+            <Button
+              onClick={clearChat}
+              variant="ghost"
+              size="sm"
+              className="absolute top-3 right-12 z-20 text-white/70 hover:text-white hover:bg-white/10"
+            >
+              <RotateCcw className="h-4 w-4 mr-1" />
+              <span className="text-xs">Reiniciar</span>
+            </Button>
+          )}
+        </div>
       </div>
 
       {/* === BOTÃO FLUTUANTE DO CHAT === */}

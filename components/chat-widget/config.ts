@@ -12,7 +12,7 @@ export const CHAT_CONFIG = {
 
   // URL do webhook para conversa contínua (N8N)
   CONVERSATION_WEBHOOK_URL:
-    "https://n8n-augustho-n8n.scyobq.easypanel.host/webhook-test/77eb0e75-b983-454a-9f05-842a6c74365b",
+    "https://n8n-augustho-n8n.scyobq.easypanel.host/webhook/77eb0e75-b983-454a-9f05-842a6c74365b",
 
   // URL do webhook para receber respostas (nosso site)
   RESPONSE_WEBHOOK_URL: "/api/webhook-response",
